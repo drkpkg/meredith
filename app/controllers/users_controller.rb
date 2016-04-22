@@ -1,0 +1,65 @@
+class UsersController < ApplicationController
+  before_action :verify_session
+  before_action :set_user, only: [:edit_profile, :profile, :dashboard, :update_profile, :destroy_profile]
+  layout 'welcome', only: [:new_profile]
+  
+  def dashboard
+  end
+
+  def profile
+  end
+
+  def new_profile
+    @user = User.new
+    render layout: 'signup'
+  end
+
+  def edit_profile
+  end
+
+  def create_profile
+    @user = User.new(user_params_for_new)
+    @user.save
+    respond_to do |format|
+        format.html
+        format.js
+    end
+  end
+
+  def update_profile
+    if @user.update(user_params_for_update)
+        redirect_to me_path(@user), notice: "Actualizaste tu perfil, yay"
+    else
+        #Next shit is remote 
+        redirect_to me_edit_path(@user)
+    end
+  end
+
+  def destroy_profile
+    @user.destroy
+    redirect_to signup_path, notice: "Te vamos a extrañar, muack"
+  end
+
+  def block_profile
+  end
+
+  def follow_profile
+  end
+
+  def suscribe_event
+  end
+  
+  private 
+  
+  def user_params_for_new
+    params.require(:user).permit(:email, :terms, :password, :password_confirmation, :user_type)
+  end
+  
+  def user_params_for_update
+    params.require(:user).permit(:name, :lastname, :alias, :email, :image_uid, :phones, :social_network)    
+  end
+  
+  def set_user
+    @user = User.find_by(id: params[:id])
+  end
+end

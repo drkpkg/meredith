@@ -1,0 +1,32 @@
+<% title 'Modificar mi perfil' %>
+
+<%= image_tag 'photographer', id: 'front-image', class: 'front-image' %>
+<div class="ui equal width center aligned padded grid">
+    <div class="row">
+        <%= form_for @user, url: users_create_profile_path , html:{ class: 'ui form' } do |form| %>
+            <%= render 'general/message_error', locals: { user: @user } %>
+            <h4 class="ui dividing header">Soy fotógrafo</h4>
+            <div class="two fields">
+                <div class="field">
+                    <label>Nombre</label>
+                    <%= form.text_field :name, placeholder: 'Nombre' %>
+                </div>
+                <div class="field">
+                    <label>Apellidos</label>
+                    <%= form.text_field :lastname, placeholder: 'Apellidos' %>
+                </div>
+            </div>
+            <div class="field">
+                <label>Correo electrónico</label>
+                <%= form.text_field :email, placeholder: 'Correo electrónico' %>                
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <%= form.check_box :terms, tabindex: 0, class:'hidden' %>
+                    <label for="user_terms" >Acepto los términos y condiciones</label>
+                </div>
+            </div>
+            <%= form.submit 'Registrarme', class: 'ui button' %>
+        <% end %> 
+    </div>
+</div>

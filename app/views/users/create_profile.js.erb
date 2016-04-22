@@ -1,0 +1,9 @@
+$("#message").empty();
+<% if !@user.errors.blank? %>
+    $("#message").append("<%= j render 'general/message_error', locals: { user: @user } %>");
+    $('.message .close').on('click', function() {
+        $(this).closest('.message').transition('fade');
+    });
+<% else %>
+    window.location.href = "me/<%= @user.id %>";
+<% end %>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hipstagram - <%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui menu">
+  <%= link_to root_path do %>
+      <%= image_tag 'logo', size: '120x45', class: 'header item' %>
+  <% end %>
+  <div class="right menu">
+
+    <% if !cookies[:idbmeredith] %>
+        <%= link_to "Iniciar Sesión", login_path, class: 'ui item' %>
+        <%= link_to "Registrarse", signup_path, class: 'ui item' %>
+    <% else %>
+        <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}",class: 'ui item' do %>
+            <!--Luego voy a poner su imagen-->
+            <%= image_tag 'nopic.png', size: '20x20',class:'ui avatar image'%>
+            Ingresar a mi cuenta
+        <% end %>
+    <% end %>
+
+  </div>
+</div>
+<%= yield %>
+
+</body>
+</html>

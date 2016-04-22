@@ -1,0 +1,39 @@
+<% title 'Ingresar' %>
+
+<div class="ui equal width center aligned padded grid">
+  <div class="row">
+    <div class="four wide column form-background">
+      <%= form_for :session, url:  login_auth_path, html:{ class: 'ui form' } do |form| %>
+          <h2 class="ui dividing header center aligned"><label>Ingresar</label></h2>
+          <div class="field">
+            <label>Correo electrónico</label>
+            <%= form.text_field :email, placeholder: 'Correo electrónico' %>
+          </div>
+          <div class="field">
+            <label>Contraseña</label>
+            <%= form.password_field :password, placeholder: 'Contraseña' %>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <%= form.check_box :persistent_login, tabindex: 0, class:'hidden' %>
+              <label for="session_persistent_login" >Recordar mi sesión</label>
+            </div>
+          </div>
+          <div class="field">
+            <%= form.submit 'Ingresar', class: 'green ui button' %>
+          </div>
+      <% end %>
+      <div class="field">
+        <div id="message">
+          <% if notice %>
+              <div class="ui negative message transition">
+                <i class="close icon"></i>
+                <div class="header">Error al iniciar sesión</div>
+                <p><%= notice %></p>
+              </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

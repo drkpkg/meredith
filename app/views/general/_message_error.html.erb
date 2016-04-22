@@ -1,0 +1,12 @@
+<div class="ui negative message transition">
+    <i class="close icon"></i>
+    <div class="header">Error al registrarte</div>
+    <p>Por favor, revisa los datos en el formulario:</p>
+    <ul class="list">
+        <% locals[:user].errors.messages.each do |attr, msg| %>
+            <% msg.each do |value| %>
+                <li><%= value %></li>
+            <% end %>
+        <% end %>
+    </ul>
+</div>
