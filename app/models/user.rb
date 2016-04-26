@@ -37,11 +37,12 @@ class User
   validates_length_of :password, :password_confirmation, minimum: 6, message: "La contraseña no puede tener menos de 6 caracteres", on: :create
   validate :password_equality, on: :create
 
+  validate :is_phone_correct_format, on: :update
   validates_presence_of :name, message: "Nombre no puede estar vacío", on: :update
   validates_presence_of :lastname, message: "Apellido no puede estar vacío", on: :update
   validates_presence_of :sex, message: "Tiene que seleccionar un género", on: :update
   validates_presence_of :address, message: "Dirección no puede estar vacía", on: :update
-
+  #validates_format_of :phone, with: /\A(([(])([+])([0-9]{3})([)])-?)?([0-9]{8})\z/i, message: "Formato de telefono incorrecto \n el formato puede ser: (+123)12345678 o 12345678", on: :update
   validates_format_of :email, with:  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, message: "Formato de correo no válido", on: :update
   validates_format_of :name, with:  /\A([a-z A-Z]*)\Z/i, message: "Nombre solo debe contener letras", on: :update
   validates_format_of :lastname, with:  /\A([a-z A-Z]*)\Z/i, message: "Apellido solo debe contener letras", on: :update
@@ -57,17 +58,32 @@ class User
       errors.add(:password, "Las contraseñas no coinciden") if password != password_confirmation
   end
 
-  def phones_list=(arg)
-    arg = arg.reject { |c| c.empty? }
-    self.phones = arg
+  def is_phone_correct_format
+    #phone_numbers_new = Array.new
+    format = /(([(])([+])([0-9]{3})([)])-?)?([0-9]{8})/
+    self.phones.each do |phone|
+      if !phone.match(format)
+        errors.add(:phones_list, "Formato de telefono incorrecto \n el formato puede ser: (+123)12345678 o 12345678")
+        break
+     # else
+     #   phone_numbers_new.append(phone)
+      end
+    end
+    #phone_numbers = phone_numbers_new
   end
 
-  def phones_list
-    self.phones.join(', ')
+  def phones_list=(phone_numbers)
+    phone_numbers = phone_numbers.reject { |c| c.empty? }
+    phone_numbers = phone_numbers.uniq
+    self.phones = phone_numbers
   end
 
-  def social_networks_list=(arg)
-    self.social_networks = arg
+  # def phones_list
+  #   self.phones.join(', ')
+  # end
+
+  def social_networks_list=(social_networks)
+    self.social_networks = social_networks
   end
 
   def social_networks_list

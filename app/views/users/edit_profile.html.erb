@@ -13,6 +13,7 @@
             <div class="row">
               <div class="seven wide column">
                 <div class="ui medium image">
+
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
@@ -21,6 +22,7 @@
                       </div>
                     </div>
                   </div>
+
                   <% if @user.avatar.nil? || @user.avatar.blank? %>
                       <%= image_tag 'nopic.png', size: '300x300', class: "ui medium image" %>
                   <% else %>
@@ -32,28 +34,33 @@
                 <div class="three fields">
                   <div class="field">
                     <label>Nombre</label>
-                    <%= form.text_field :name, placeholder: 'Nombre' %>
+                    <%= form.text_field :name, placeholder: 'Nombre' if @user.name.blank?%>
+                    <%= form.text_field :name, placeholder: 'Nombre', disabled: "" if !@user.name.blank?%>
                   </div>
                   <div class="field">
                     <label>Apellidos</label>
-                    <%= form.text_field :lastname, placeholder: 'Apellidos' %>
+                    <%= form.text_field :lastname, placeholder: 'Apellidos' if @user.lastname.blank? %>
+                    <%= form.text_field :lastname, placeholder: 'Apellidos', disabled: "" if !@user.lastname.blank? %>
                   </div>
                   <div class="field">
                     <label>Sexo</label>
-                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} %>
+                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} if @user.sex.blank?%>
+                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown disabled'} if !@user.sex.blank?%>
                   </div>
-                </div>
-                <div class="field">
-                  <label>Alias</label>
-                  <%= form.text_field :alias, placeholder: 'Alias' %>
-                </div>
-                <div class="field">
-                  <label>Dirección</label>
-                  <%= form.text_field :address %>
                 </div>
                 <div class="two fields">
                   <div class="field">
-                    <label>Mis redes sociales</label>
+                    <label>Alias</label>
+                    <%= form.text_field :alias, placeholder: 'Alias' %>
+                  </div>
+                  <div class="field">
+                    <label>Dirección</label>
+                    <%= form.text_field :address %>
+                  </div>
+                </div>
+                <div class="two fields">
+                  <div class="field">
+                    <label class="pup" data-content="Copia y pega los enlaces de tus perfiles de tus redes sociales en los campos que ves abajo">Mis redes sociales</label>
                     <% @user.social_networks_list.each do |key, value| %>
                         <div class="field">
                           <div class="ui mini action input">
@@ -64,7 +71,7 @@
                     <% end %>
                   </div>
                   <div class="field">
-                    <label>Teléfonos de referencia</label>
+                    <label class="pup" data-html="El formato de teléfonos es el siguiente: <br/> - (+123)12345678 <br/> - 12345678 <br/><br/><label>Cualquier otro formato será rechazado</label>">Teléfonos de referencia</label>
                     <div id="phone_numbers">
                       <% @user.phones.each do |key| %>
                           <div class="field">

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if @user.update(user_params_for_update)
         redirect_to me_path(@user), notice: "Actualizaste tu perfil, yay"
     else
-      render 'edit_profile'
+      redirect_to me_edit_path(@user)
     end
   end
 
