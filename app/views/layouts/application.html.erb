@@ -25,10 +25,10 @@
             Menu
             <i class="dropdown icon"></i>
             <div class="menu transition hidden" tabindex="-1">
-                <%= link_to "#{@user.id}/info", class: 'item' do %>
+                <%= link_to me_info_path(@user), class: 'item' do %>
                     <i class="user icon"></i> Yop
                 <% end%>
-                <%= link_to "#{@user.id}/edit", class: 'item' do %>
+                <%= link_to me_edit_path(@user), class: 'item' do %>
                     <i class="cogs icon"></i> configuración
                 <% end%>
                 <div class="divider"></div>

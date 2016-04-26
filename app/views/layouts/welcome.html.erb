@@ -19,11 +19,26 @@
         <%= link_to "Iniciar Sesión", login_path, class: 'ui item' %>
         <%= link_to "Registrarse", signup_path, class: 'ui item' %>
     <% else %>
-        <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}",class: 'ui item' do %>
-            <!--Luego voy a poner su imagen-->
-            <%= image_tag 'nopic.png', size: '20x20',class:'ui avatar image'%>
-            Ingresar a mi cuenta
-        <% end %>
+
+        <div class="ui dropdown item" tabindex="0">
+          <%= image_tag 'nopic.png', size: '20x20',class:'ui avatar image'%>
+          <%= User.find_by(id: cookies.signed[:idbmeredith]['$oid']).email %>
+          <i class="dropdown icon"></i>
+          <div class="menu transition hidden" tabindex="-1">
+            <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}",class: 'ui item' do %>
+                <!--Luego voy a poner su imagen-->
+                <i class="user icon"></i>
+                Yop
+            <% end %>
+            <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}", class: 'item' do %>
+                <i class="cogs icon"></i> configuración
+            <% end%>
+            <div class="divider"></div>
+            <%= link_to  logout_path, class: 'item ' do %>
+                <i class="sign out icon"></i> Salir
+            <% end%>
+          </div>
+        </div>
     <% end %>
 
   </div>

@@ -34,13 +34,9 @@
 }
 
 .form-background{
-    background-color: rgb(45, 95, 191);
+    background-color: rgb(151, 177, 191);
     padding: 14px 14px 14px 14px;
     border-radius: 15px 15px 15px 15px;
-}
-
-form label{
-    color: #ffffff !important;
 }
 
 #message{

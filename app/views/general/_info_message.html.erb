@@ -1,5 +1,17 @@
-<div class="ui negative message transition">
+<div class="ui info message transition">
     <i class="close icon"></i>
-    <div class="header">Hey listen!!</div>
-    <p><%= notice %></p>
+    <div class="header">
+      <div class="ui grid">
+        <div class="one wide column">
+          <%= image_tag 'listen.png', size: '25x25', class: 'ui image' %>
+        </div>
+        <div class="twelve wide column">
+          Hey listen!!
+        </div>
+      </div>
+    </div>
+    <p>
+      <%= locals[:notice] %>
+      <%= link_to "aquí", locals[:link] if locals[:link]%>
+    </p>
 </div>

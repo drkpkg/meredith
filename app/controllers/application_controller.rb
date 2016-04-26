@@ -10,8 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_session
-    if session[:current_user_id]== nil
+    if session[:current_user_id].nil? and cookies.signed[:idbmeredith].nil?
       redirect_to root_path
+    else
+      session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
     end
   end
 end

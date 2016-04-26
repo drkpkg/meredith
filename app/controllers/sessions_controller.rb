@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
         else
             render layout: 'login'
         end
-
     end
 
     def authorize_user

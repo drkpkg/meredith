@@ -1,3 +1,4 @@
+/public/system
 /.idea
 /log/*
 !/log/.keep

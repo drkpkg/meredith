@@ -5,5 +5,5 @@ $("#message").empty();
         $(this).closest('.message').transition('fade');
     });
 <% else %>
-    window.location.href = "me/<%= @user.id %>";
+    window.location.href = "<%= root_path %>";
 <% end %>

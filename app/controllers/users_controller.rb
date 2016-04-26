@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :verify_session
+  before_action :verify_session, only: [:dashboard, :profile, :edit_profile]
   before_action :set_user, only: [:edit_profile, :profile, :dashboard, :update_profile, :destroy_profile]
   layout 'welcome', only: [:new_profile]
   
@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def update_profile
+    set_params(params)
     if @user.update(user_params_for_update)
         redirect_to me_path(@user), notice: "Actualizaste tu perfil, yay"
     else
-        #Next shit is remote 
-        redirect_to me_edit_path(@user)
+      render 'edit_profile'
     end
   end
 
@@ -56,10 +56,16 @@ class UsersController < ApplicationController
   end
   
   def user_params_for_update
-    params.require(:user).permit(:name, :lastname, :alias, :email, :image_uid, :phones, :social_network)    
+    params.require(:user).permit(:name, :lastname, :alias, :avatar, :phones_list, :social_networks_list, :sex, :address)
   end
   
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: current_user.id)
+  end
+
+  def set_params(params)
+    @user.phones_list = params[:user][:phones_list]
+    @user.social_networks_list = params[:user][:social_networks_list]
+    @user.profile_is_complete
   end
 end

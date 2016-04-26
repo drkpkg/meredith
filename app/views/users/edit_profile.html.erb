@@ -1,32 +1,92 @@
 <% title 'Modificar mi perfil' %>
 
-<%= image_tag 'photographer', id: 'front-image', class: 'front-image' %>
 <div class="ui equal width center aligned padded grid">
-    <div class="row">
-        <%= form_for @user, url: users_create_profile_path , html:{ class: 'ui form' } do |form| %>
-            <%= render 'general/message_error', locals: { user: @user } %>
-            <h4 class="ui dividing header">Soy fotógrafo</h4>
-            <div class="two fields">
-                <div class="field">
+  <div class="row">
+    <div class="ten wide column">
+      <%= form_for @user, url: users_update_profile_path , html:{ class: 'ui form' } do |form| %>
+          <% if !@user.errors.blank? %>
+              <%= render 'general/message_error', locals: { user: @user } %>
+          <% end %>
+          <h4 class="ui dividing header">Editar mi información</h4>
+          <%= render 'general/info_message', locals: { notice: "Recuerda que una vez ingresada, solo podrás cambiar información básica de tu perfil!!!" }  %>
+          <div class="ui grid">
+            <div class="row">
+              <div class="seven wide column">
+                <div class="ui medium image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted header">Cambiar Imagen de perfil</div>
+                        <%= form.file_field :avatar, class: 'ui button' %>
+                      </div>
+                    </div>
+                  </div>
+                  <% if @user.avatar.nil? || @user.avatar.blank? %>
+                      <%= image_tag 'nopic.png', size: '300x300', class: "ui medium image" %>
+                  <% else %>
+                      <%= image_tag @user.avatar, size: '300x300', class: "ui medium image"  %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="nine wide column">
+                <div class="three fields">
+                  <div class="field">
                     <label>Nombre</label>
                     <%= form.text_field :name, placeholder: 'Nombre' %>
-                </div>
-                <div class="field">
+                  </div>
+                  <div class="field">
                     <label>Apellidos</label>
                     <%= form.text_field :lastname, placeholder: 'Apellidos' %>
+                  </div>
+                  <div class="field">
+                    <label>Sexo</label>
+                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} %>
+                  </div>
                 </div>
-            </div>
-            <div class="field">
-                <label>Correo electrónico</label>
-                <%= form.text_field :email, placeholder: 'Correo electrónico' %>                
-            </div>
-            <div class="field">
-                <div class="ui checkbox">
-                    <%= form.check_box :terms, tabindex: 0, class:'hidden' %>
-                    <label for="user_terms" >Acepto los términos y condiciones</label>
+                <div class="field">
+                  <label>Alias</label>
+                  <%= form.text_field :alias, placeholder: 'Alias' %>
                 </div>
+                <div class="field">
+                  <label>Dirección</label>
+                  <%= form.text_field :address %>
+                </div>
+                <div class="two fields">
+                  <div class="field">
+                    <label>Mis redes sociales</label>
+                    <% @user.social_networks_list.each do |key, value| %>
+                        <div class="field">
+                          <div class="ui mini action input">
+                            <%= form.text_field :social_networks_list, name: "user[social_networks_list][#{key}]", value: "#{value}" %>
+                            <div class="ui teal right icon button pup" data-content="Enlazar con <%= key %>"><i class="tiny <%= key.to_s.downcase %> icon"></i></div>
+                          </div>
+                        </div>
+                    <% end %>
+                  </div>
+                  <div class="field">
+                    <label>Teléfonos de referencia</label>
+                    <div id="phone_numbers">
+                      <% @user.phones.each do |key| %>
+                          <div class="field">
+                            <div class="ui mini action input">
+                              <%= form.text_field :phones_list, name: "user[phones_list][]", value: "#{key}" %>
+                              <a href="#" class="ui teal right icon button" onclick="delete_input(this)">
+                                <i class="delete icon"></i>
+                              </a>
+                            </div>
+                          </div>
+                      <% end %>
+                    </div>
+                    <a href="#" class="add">agregar número</a>
+                  </div>
+                </div>
+
+                <%= form.submit 'Actualizar mi información', class: 'green ui button' %>
+                <%= link_to "Volver al dashboard", me_path(@user), class: "red ui button" %>
+              </div>
             </div>
-            <%= form.submit 'Registrarme', class: 'ui button' %>
-        <% end %> 
+          </div>
+      <% end %>
     </div>
+  </div>
 </div>

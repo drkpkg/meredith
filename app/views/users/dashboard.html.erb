@@ -4,7 +4,9 @@
     <div class="ui grid">
         <div class="four wide column"></div>
         <div class="eight wide column">
-                  
+          <% if @user.is_profile_complete == false %>
+            <%= render 'general/info_message', locals:{notice: "Recuerda que tienes que completar tus datos de usuario", link: "#{me_edit_path(@user)}"} %>
+          <% end %>
         </div>
         <div class="four wide column"></div>
     </div>
