@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   patch 'users/block_profile' => 'users#block_profile'
   patch 'users/follow_profile' => 'users#follow_profile'
   patch 'users/suscribe_event' => 'users#suscribe_event'
+
+  match '404' => 'page#not_found', via: [:get]
 end

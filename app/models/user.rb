@@ -98,4 +98,8 @@ class User
     @password = Password.create(new_password)
     self.password_hash = @password
   end
+
+  def complete_name
+    self.name + " " + self.lastname
+  end
 end

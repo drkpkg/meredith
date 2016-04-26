@@ -1,13 +1,63 @@
 <% title 'Mis cosas' %>
 
 <div class="row">
-    <div class="ui grid">
-        <div class="four wide column"></div>
+  <div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="four wide column"><%= render 'profile' %></div>
+    <div class="eight wide column">
+      <% if @user.is_profile_complete == false %>
+          <%= render 'general/info_message', locals:{notice: "Recuerda que tienes que completar tus datos de usuario", link: "#{me_edit_path(@user)}"} %>
+      <% end %>
+      <div class="ui grid">
         <div class="eight wide column">
-          <% if @user.is_profile_complete == false %>
-            <%= render 'general/info_message', locals:{notice: "Recuerda que tienes que completar tus datos de usuario", link: "#{me_edit_path(@user)}"} %>
-          <% end %>
+          <div class="ui fluid card">
+            <div class="blurring dimmable image profile">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <%= link_to me_edit_path(@user), class: 'ui button' do %>
+                        <i class="big list icon"></i> Mis eventos
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <%= image_tag 'event.jpg' %>
+            </div>
+          </div>
         </div>
-        <div class="four wide column"></div>
+        <div class="eight wide column">
+          <div class="ui fluid card">
+            <div class="blurring dimmable image profile">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <%= link_to me_edit_path(@user), class: 'ui button' do %>
+                        <i class="big add icon"></i> Registrar nuevo evento
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <%= image_tag 'new_event.jpg' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui fluid card">
+        <div class="content">
+          <a class="header">Mis estadísticas</a>
+        </div>
+        <div class="content">
+          Aquí vendrán las estadísticas de usuario
+          <ul>
+            <li>Imagenes vendidas</li>
+            <li>Imagenes totales</li>
+            <li>Promedio de imagenes por evento</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
+    <div class="two wide column"></div>
+  </div>
 </div>

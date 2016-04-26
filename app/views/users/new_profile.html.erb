@@ -2,7 +2,7 @@
 
 <div class="ui equal width center aligned padded grid">
   <div class="row">
-    <div class="four wide column form-background">
+    <div class="four wide column">
       <%= form_for @user, url: users_create_profile_path, remote: true, html:{ class: 'ui form' } do |form| %>
           <%= form.hidden_field :user_type, value: 'photographer' %>
           <h2 class="ui dividing header center aligned"><label>Abre una cuenta</label></h2>

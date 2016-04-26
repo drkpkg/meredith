@@ -9,10 +9,16 @@ class ApplicationController < ActionController::Base
         User.find_by(id: session[:current_user_id])
   end
 
-  def verify_session
+  def exist_user
     if session[:current_user_id].nil? and cookies.signed[:idbmeredith].nil?
       redirect_to root_path
     else
+      session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
+    end
+  end
+
+  def verify_user
+    if !session[:current_user_id].nil? and cookies.signed[:idbmeredith].nil?
       session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
     end
   end

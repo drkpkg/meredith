@@ -15,6 +15,11 @@ ready = () ->
   $('.ui.image').dimmer({
       on: 'hover'
   })
+
+  $('.profile').dimmer({
+    on: 'hover'
+  })
+
   $('.pup').popup()
 
   $('.add').unbind('click').click ->

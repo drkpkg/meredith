@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :verify_session, only: [:dashboard, :profile, :edit_profile]
+  before_action :exist_user, only: [:dashboard, :profile, :edit_profile]
+  before_action :verify_user, only: [:new_profile]
   before_action :set_user, only: [:edit_profile, :profile, :dashboard, :update_profile, :destroy_profile]
   layout 'welcome', only: [:new_profile]
   
@@ -10,8 +11,13 @@ class UsersController < ApplicationController
   end
 
   def new_profile
-    @user = User.new
-    render layout: 'signup'
+    if session[:current_user_id]
+      redirect_to me_path(session[:current_user_id])
+    else
+      @user = User.new
+      render layout: 'signup'
+    end
+
   end
 
   def edit_profile

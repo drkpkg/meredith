@@ -1,0 +1,33 @@
+<div class="ui special card">
+  <div class="ui card">
+    <div class="content">
+      <h3 class="header"><%= @user.complete_name %></h3>
+    </div>
+    <div class="blurring dimmable image profile">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <%= link_to me_edit_path(@user), class: 'ui button' do %>
+                <i class="big edit icon"></i> Editar mi perfil
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% if @user.avatar.blank? %>
+          <%= image_tag 'nopic.png' %>
+      <% else %>
+          <%= image_tag @user.avatar %>
+      <% end %>
+    </div>
+
+    <div class="content">
+      <div class="description">
+        <%= @user.alias %>
+        <span class="right floated">
+        17
+        <i class="big heart outline like icon pup" data-content="17 Personas te siguen"></i>
+      </span>
+      </div>
+    </div>
+  </div>
+</div>
