@@ -21,5 +21,13 @@ Rails.application.routes.draw do
   patch 'users/follow_profile' => 'users#follow_profile'
   patch 'users/suscribe_event' => 'users#suscribe_event'
 
+  get 'me/:id/events' => 'events#index', as: :event
+  get 'me/:id/events/new_event' => 'events#new_event', as: :event_new  
+  get 'me/:id/events/:event_id' => 'events#info_event', as: :event_info
+  get 'me/:id/events/:event_id/edit' => 'events#edit_event', as: :event_edit
+  post 'event/create_event' => 'events#create_event'  
+  patch 'event/update_event' => 'events#update_event'
+  delete 'event/delete_event' => 'events#delete_event'
+ 
   match '404' => 'page#not_found', via: [:get]
 end
