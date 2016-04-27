@@ -7,7 +7,7 @@ class EventsController < ApplicationController
    end
    
    def index
-       @events = Event.where(user_id: params[:id])
+       @events = Event.where(user_id: current_user.id)
    end
    
    def edit_event
@@ -18,14 +18,18 @@ class EventsController < ApplicationController
    
    def create_event
        @event = Event.new(event_params_for_new)
+       @event.user_id = current_user.id
        if @event.save
+           flash[:success] = "Ahora puedes empezar a subir tus fotografías en esta galería"
            redirect_to event_info_path(current_user.id, @event)
        else
-           render 'new_event'
+           flash[:error] = @event.errors
+           redirect_to event_new_path(current_user.id) 
        end
    end
    
    def destroy_event
+    
    end
    
    def info_event

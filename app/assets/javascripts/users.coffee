@@ -7,8 +7,8 @@
   #$(input).remove()
 
 ready = () ->
-  $('.message .close').on 'click', ->
-    $(this).closest('.message').transition 'fade'
+  #$('.message .close').on 'click', ->
+  #  $(this).closest('.message').transition 'fade'
 
   $('.ui.dropdown').dropdown()
 

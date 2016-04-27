@@ -1,0 +1,30 @@
+<% title "Mi galería" %>
+<div class="row">
+  <div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="twelve wide column">
+        <% if flash[:success] %>
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="header">Yay!</div>
+                <p><%= flash[:success] %></p>
+            </div>                
+        <% end %> 
+      <div class="ui fluid card">
+        <div class="content">
+          <a class="header">Información</a>
+        </div>
+        <div class="content">
+          Aquí vendrán de la galería de usuario
+          <ul>
+            <li>Total de imagenes</li>
+            <li>Galeria</li>
+            <li>Promedio de imagenes por evento</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="two wide column"></div>
+  </div>
+</div>

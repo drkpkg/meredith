@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def update_profile
     set_params(params)
     if @user.update(user_params_for_update)
-        redirect_to me_path(@user), notice: "Actualizaste tu perfil, yay"
+      redirect_to me_path(@user), notice: "Actualizaste tu perfil, yay"
     else
       redirect_to me_edit_path(@user)
     end

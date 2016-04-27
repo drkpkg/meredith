@@ -3,7 +3,7 @@
     <div class="header">Error al registrarte</div>
     <p>Por favor, revisa los datos en el formulario:</p>
     <ul class="list">
-        <% locals[:user].errors.messages.each do |attr, msg| %>
+        <% locals[:object].errors.messages.each do |attr, msg| %>
             <% msg.each do |value| %>
                 <li><%= value %></li>
             <% end %>

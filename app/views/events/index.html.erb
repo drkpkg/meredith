@@ -1,27 +1,29 @@
 <% title "Mis galerias" %>
 <div class="ui grid">
    <div class="row">
-      <div class="four wide column"></div>
-      <div class="eight wide column">
-        <% if @events.blank? %>
+      <div class="two wide column"></div>
+      <div class="twelve wide column">
+        <% if @events.nil? %>
             <%= render 'general/info_message', locals: {notice: "No tienes galerias registradas, registra una para empezar ", link: "#{event_new_path}"} %>
         <% else %>
-            <div class="ui fluid card">
-                <div class="blurring dimmable image profile">
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <%= link_to event_path(@user), class: 'ui button' do %>
-                                    <i class="big list icon"></i> Mis eventos
-                                <% end %>
+            <div class="ui cards">
+                <% @events.each do |event| %>                
+                    <div class="ui card">
+                        <div class="blurring dimmable image profile">
+                            <div class="ui dimmer">
+                                <div class="content">
+                                    <div class="center">
+                                        <%= event.event_name %>
+                                    </div>                                                                       
+                                </div>
                             </div>
+                            <%= image_tag 'event.jpg' %>
                         </div>
                     </div>
-                    <%= image_tag 'event.jpg' %>
-                </div>
+                <% end %>
             </div>
         <% end %>
       </div>
-     <div class="four wide column"></div>            
+     <div class="two wide column"></div>            
    </div>
 </div>

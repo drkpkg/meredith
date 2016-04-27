@@ -4,6 +4,20 @@
     <div class="row">
         <div class="four wide column"></div>
         <div class="eight wide column">
+            <% if flash[:error] %>
+                <div class="ui negative message transition">
+                    <i class="close icon"></i>
+                    <div class="header">Error registrar galería</div>
+                    <p>Por favor, revisa los datos:</p>
+                    <ul class="list">
+                        <% flash[:error].each do |attr, msg| %>
+                            <% msg.each do |value| %>
+                                <li><%= value %></li>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                </div>                
+            <% end %>
             <div class="ui two top attached steps">
                 <div class="active step">
                     <i class="info circle icon"></i>

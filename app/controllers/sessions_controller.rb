@@ -10,18 +10,21 @@ class SessionsController < ApplicationController
     end
 
     def authorize_user
-        @user = User.find_by(email: params[:session][:email])
-        (redirect_to login_path, notice: "Por favor verifica tus datos") if @user.blank?
-        if @user.password == params[:session][:password]
-            session[:current_user_id] = @user.id
-            if params[:session][:persistent_login]=='1'
-                cookies.permanent.signed[:idbmeredith] = @user.id
-            else
-                cookies.signed[:idbmeredith] = @user.id
-            end
-            redirect_to me_path(@user)
+        if params[:session][:email].blank? and params[:session][:password].blank? 
+            redirect_to login_path, notice: "Campos en blanco"
         else
-            redirect_to login_path, notice: "Por favor verifica tus datos"
+            @user = User.find_by(email: params[:session][:email])
+            if @user.password == params[:session][:password]
+                session[:current_user_id] = @user.id
+                if params[:session][:persistent_login]=='1'
+                    cookies.permanent.signed[:idbmeredith] = @user.id
+                else
+                    cookies.signed[:idbmeredith] = @user.id
+                end
+                redirect_to me_path(@user)
+            else
+                redirect_to login_path, notice: "Por favor verifica tus datos"
+            end
         end
     end
 
