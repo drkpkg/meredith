@@ -17,6 +17,12 @@ class EventsController < ApplicationController
    end
    
    def create_event
+       @event = Event.new(event_params_for_new)
+       if @event.save
+           redirect_to event_info_path(current_user.id, @event)
+       else
+           render 'new_event'
+       end
    end
    
    def destroy_event
@@ -28,7 +34,7 @@ class EventsController < ApplicationController
    private
    
    def event_params_for_new
-       params.require(:event).permit(:description)
+       params.require(:event).permit(:event_name, :event_description)
    end
    
    def event_params_for_update

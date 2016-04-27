@@ -1,7 +1,8 @@
 class Event
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  
+  field :event_name, type: String  
   field :event_description, type: String
   field :event_photos, type: Array, default: []
 

@@ -1,0 +1,11 @@
+<%= form_for @event, url: event_create_event_path, html: {class: "ui form"} do |form| %>
+    <div class="field">
+        <label>Nombre de la galería</label>
+        <%= form.text_field :event_name %>
+    </div>
+    <div class="field">
+        <label>Descripción corta</label>    
+        <%= form.text_area :event_description %>
+    </div>
+    <%= form.submit "Generar nueva galería", class: "ui button"%>
+<% end %>
