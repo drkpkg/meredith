@@ -2,7 +2,16 @@
 
 <div class="ui grid">
     <div class="row">
-        <div class="four wide column"></div>
+        <div class="four wide column">
+            <div class="ui small vertical menu">
+                <%= link_to me_path(params[:id]), class:"item" do %>
+                    <i class="dashboard icon"></i> Dashboard
+                <% end %>
+                <%= link_to event_path(params[:id], params[:event_id]), class:"item" do %>
+                    <i class="camera retro icon"></i> Galerías
+                <% end %>
+            </div>
+        </div>
         <div class="eight wide column">
             <% if flash[:error] %>
                 <div class="ui negative message transition">

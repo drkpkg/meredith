@@ -12,4 +12,8 @@ class Event
   
   validates_uniqueness_of :event_name, sensitive: false, message: "El nombre de la galería debe ser único"
   validates_presence_of :event_name, message: "El nombre de la galería no puede estar vacío"
+  
+  def total_photos
+    Photo.where(event_id: self.id).count
+  end
 end

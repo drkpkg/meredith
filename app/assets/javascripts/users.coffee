@@ -3,12 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 @delete_input = (input) ->
   $(input).parent('.ui.action.input').parent('.field').remove()
-  #$('#phone_numbers.field').remove()
-  #$(input).remove()
-
+  
 ready = () ->
-  #$('.message .close').on 'click', ->
-  #  $(this).closest('.message').transition 'fade'
+  $('.message.transition').on 'click', ->
+    $(this).closest('.message').transition 'fade'
 
   $('.ui.dropdown').dropdown()
 

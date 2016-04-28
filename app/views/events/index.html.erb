@@ -1,7 +1,17 @@
 <% title "Mis galerias" %>
 <div class="ui grid">
    <div class="row">
-      <div class="two wide column"></div>
+      <div class="two wide column">
+         <div class="ui small vertical menu">
+            <%= link_to me_path(params[:id]), class:"item" do %>
+                <i class="dashboard icon"></i> Dashboard
+            <% end %>
+            <%= link_to event_new_path, class:"item" do %>
+                <i class="camera retro icon"></i> Nueva galería
+            <% end %>
+         </div>
+      </div>
+      <div class="one wide column"></div>
       <div class="twelve wide column">
         <% if @events.nil? %>
             <%= render 'general/info_message', locals: {notice: "No tienes galerias registradas, registra una para empezar ", link: "#{event_new_path}"} %>
@@ -13,17 +23,20 @@
                             <div class="ui dimmer">
                                 <div class="content">
                                     <div class="center">
-                                        <%= event.event_name %>
+                                        <%= link_to event.event_name, event_info_path(event.user.id, event.id), class:"blue ui button" %>
                                     </div>                                                                       
                                 </div>
                             </div>
-                            <%= image_tag 'event.jpg' %>
+                            <%= image_tag 'gallery.jpg' %>
+                        </div>
+                        <div class="extra content">
+                            <i class="photo icon"></i><%= event.total_photos %> fotografías
                         </div>
                     </div>
                 <% end %>
             </div>
         <% end %>
       </div>
-     <div class="two wide column"></div>            
+      <div class="one wide column"></div>
    </div>
 </div>

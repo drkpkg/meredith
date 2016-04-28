@@ -1,7 +1,17 @@
 <% title "Mi galería" %>
 <div class="row">
   <div class="ui grid">
-    <div class="two wide column"></div>
+    <div class="two wide column">
+        <div class="ui small vertical menu">
+            <%= link_to me_path(params[:id]), class:"item" do %>
+                <i class="dashboard icon"></i> Dashboard
+            <% end %>
+            <%= link_to event_path(params[:id], params[:event_id]), class:"item" do %>
+                <i class="camera retro icon"></i> Galerías
+            <% end %>
+         </div>
+    </div>
+    <div class="one wide column"></div>    
     <div class="twelve wide column">
         <% if flash[:success] %>
             <div class="ui success message">
@@ -15,6 +25,13 @@
           <a class="header">Información</a>
         </div>
         <div class="content">
+          <div class="ui images">
+            <%= image_tag 'nopic', size:'300x250' %>
+            <%= image_tag 'nopic', size:'300x250' %>
+            <%= image_tag 'nopic', size:'300x250' %>
+            <%= image_tag 'nopic', size:'300x250' %>
+            <%= image_tag 'nopic', size:'300x250' %>            
+          </div>
           Aquí vendrán de la galería de usuario
           <ul>
             <li>Total de imagenes</li>
@@ -25,6 +42,6 @@
       </div>
 
     </div>
-    <div class="two wide column"></div>
+    <div class="one wide column"></div>
   </div>
 </div>

@@ -1,14 +1,24 @@
 <% title 'Modificar mi perfil' %>
 
-<div class="ui equal width center aligned padded grid">
+<div class="ui equal width aligned padded grid">
   <div class="row">
+    <div class="two wide column">
+        <div class="ui small vertical menu">
+            <%= link_to me_path(params[:id]), class:"item" do %>
+                <i class="dashboard icon"></i> Dashboard
+            <% end %>
+         </div>
+    </div>
+    <div class="two wide column"></div>    
     <div class="ten wide column">
       <%= form_for @user, url: users_update_profile_path , html:{ class: 'ui form' } do |form| %>
           <% if !@user.errors.blank? %>
               <%= render 'general/message_error', locals: { user: @user } %>
           <% end %>
           <h4 class="ui dividing header">Editar mi información</h4>
-          <%= render 'general/info_message', locals: { notice: "Recuerda que una vez ingresada, solo podrás cambiar información básica de tu perfil!!!" }  %>
+          <% if @user.is_profile_complete == false %>
+            <%= render 'general/info_message', locals: { notice: "Recuerda que una vez ingresada, solo podrás cambiar información básica de tu perfil!!!" }  %>
+          <% end %>
           <div class="ui grid">
             <div class="row">
               <div class="seven wide column">
