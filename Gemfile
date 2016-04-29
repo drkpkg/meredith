@@ -23,6 +23,8 @@ gem 'mongoid', '~> 5.1.0'
 gem 'bson_ext'
 gem 'dotenv-rails'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'photoswipe-rails'
+gem "jquery-fileupload-rails"
 gem 'aws-sdk', '~> 1.3.4'
 gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
 gem 'rack-cache', :require => 'rack/cache'

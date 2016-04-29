@@ -2,42 +2,42 @@
 <div class="row">
   <div class="ui grid">
     <div class="two wide column">
-        <div class="ui small vertical menu">
-            <%= link_to me_path(params[:id]), class:"item" do %>
-                <i class="dashboard icon"></i> Dashboard
-            <% end %>
-            <%= link_to event_path(params[:id], params[:event_id]), class:"item" do %>
-                <i class="camera retro icon"></i> Galerías
-            <% end %>
-         </div>
+      <div class="ui small vertical menu">
+        <%= link_to me_path(@event.user_id), class:"item" do %>
+            <i class="dashboard icon"></i> Dashboard
+        <% end %>
+        <%= link_to event_path(@event), class:"item" do %>
+            <i class="camera retro icon"></i> Galerías
+        <% end %>
+      </div>
     </div>
-    <div class="one wide column"></div>    
+    <div class="one wide column"></div>
     <div class="twelve wide column">
-        <% if flash[:success] %>
-            <div class="ui success message">
-                <i class="close icon"></i>
-                <div class="header">Yay!</div>
-                <p><%= flash[:success] %></p>
-            </div>                
-        <% end %> 
+      <% if flash[:success] %>
+          <div class="ui success message transition">
+            <i class="close icon"></i>
+            <div class="header">Yay!</div>
+            <p><%= flash[:success] %></p>
+          </div>
+      <% end %>
       <div class="ui fluid card">
         <div class="content">
-          <a class="header">Información</a>
+          <a class="header"><%= @event.event_name %></a>
         </div>
         <div class="content">
-          <div class="ui images">
-            <%= image_tag 'nopic', size:'300x250' %>
-            <%= image_tag 'nopic', size:'300x250' %>
-            <%= image_tag 'nopic', size:'300x250' %>
-            <%= image_tag 'nopic', size:'300x250' %>
-            <%= image_tag 'nopic', size:'300x250' %>            
+          <%= form_for Photo.new, url: photo_create_path(id: params[:id], event_id: params[:event_id]) do |form| %>
+              <label>Subir imágenes a mi galería</label>
+              <%= form.file_field :photo, multiple: true, remote: true, name: "photo[image][]" %>
+
+              <div id="progress">
+                <div class="meter orange animate" style="width: 0%;"></div>
+              </div>
+          <% end %>
+        </div>
+        <div class="extra content">
+          <div id="gallery" class="ui cards">
+            <%= render 'photos/index', locals:{id: params[:id], event_id: params[:event_id]} %>
           </div>
-          Aquí vendrán de la galería de usuario
-          <ul>
-            <li>Total de imagenes</li>
-            <li>Galeria</li>
-            <li>Promedio de imagenes por evento</li>
-          </ul>
         </div>
       </div>
 

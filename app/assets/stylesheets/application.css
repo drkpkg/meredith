@@ -11,6 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require photoswipe
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require_self
  */
  

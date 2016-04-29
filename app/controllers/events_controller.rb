@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-   before_action :set_event, only:[:edit_event, :event_info]
+   before_action :set_event, only:[:edit_event, :info_event]
    before_action :exist_user, only:[:index, :new_event, :event_info]
    
    def new_event
@@ -33,6 +33,7 @@ class EventsController < ApplicationController
    end
    
    def info_event
+     @photos = Photo.where(event_id: params[:event_id])
    end
    
    private

@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require photoswipe
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require_tree .
 
 $(document).on('ready page:load', function() {

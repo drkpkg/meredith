@@ -4,7 +4,7 @@
 @delete_input = (input) ->
   $(input).parent('.ui.action.input').parent('.field').remove()
   
-ready = () ->
+ready = ->
   $('.message.transition').on 'click', ->
     $(this).closest('.message').transition 'fade'
 

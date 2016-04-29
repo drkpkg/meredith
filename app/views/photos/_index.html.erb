@@ -1,0 +1,16 @@
+<% @photos.each do |photo| %>
+    <div class="card">
+      <div class="image">
+        <a href="#">
+          <%= image_tag photo.image.url(:small), class: 'ui medium bordered image ' %>
+        </a>
+      </div>
+      <div class="extra content">
+        <div class="right floated">
+          <%= button_to photo_delete_path(locals[:id], locals[:event_id], photo.id), method: :delete, remote: true, data:{confirm: "¿Estás seguro de borrar esta foto de la galería?", content: "Eliminar de la galería"}, class:'small red ui button pup' do %>
+              <i class="delete icon"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>

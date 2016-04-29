@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'page#index'
 
   #Sessions
@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   post 'event/create_event' => 'events#create_event', as: :event_create  
   patch 'event/update_event' => 'events#update_event', as: :event_update
   delete 'event/delete_event' => 'events#delete_event', as: :event_delete
- 
+
+  get '/photos' => 'photos#index'
+  post 'event/:id/add_photos' => 'photos#create', as: :photo_create
+  delete 'me/:id/events/:event_id/:image_id/delete_photo' => 'photos#delete', as: :photo_delete
+
   match '404' => 'page#not_found', via: [:get]
 end
