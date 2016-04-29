@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'me/:id/events/:event_id/edit' => 'events#edit_event', as: :event_edit
   post 'event/create_event' => 'events#create_event', as: :event_create  
   patch 'event/update_event' => 'events#update_event', as: :event_update
-  delete 'event/delete_event' => 'events#delete_event', as: :event_delete
+  delete 'event/:event_id/delete_event' => 'events#delete_event', as: :event_delete
 
   get '/photos' => 'photos#index'
   post 'event/:id/add_photos' => 'photos#create', as: :photo_create

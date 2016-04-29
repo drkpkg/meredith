@@ -26,11 +26,23 @@
         </div>
         <div class="content">
           <%= form_for Photo.new, url: photo_create_path(id: params[:id], event_id: params[:event_id]) do |form| %>
-              <label>Subir imágenes a mi galería</label>
+              <div class="content">
+                <label>Puedes usar el navegador de archivos o puedes arrastrar aqui las fotos y se cargarán automáticamente.</label>
+              </div>
               <%= form.file_field :photo, multiple: true, remote: true, name: "photo[image][]" %>
-
               <div id="progress">
                 <div class="meter orange animate" style="width: 0%;"></div>
+              </div>
+              <div id="loading-message">
+                <div class="ui icon message">
+                  <i class="notched circle loading icon"></i>
+                  <div class="content">
+                    <div class="header">
+                      Espera!
+                    </div>
+                    <p>Estamos subiendo las imágenes con polvo de hadas :D</p>
+                  </div>
+                </div>
               </div>
           <% end %>
         </div>
