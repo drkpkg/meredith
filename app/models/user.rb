@@ -27,6 +27,7 @@ class User
   field :password_hash, type: String
   field :user_type, type: String
   field :terms, type: Boolean
+  field :country, type: String
   field :follow_users, type: Array, default: []
   field :address, type: String, default: ''
   field :alias, type: String, default: ''
@@ -113,6 +114,11 @@ class User
 
   def complete_name
     self.name + " " + self.lastname
+  end
+
+  def sex_humanize
+    return 'Hombre' if self.sex=='h'
+    return 'Mujer' if self.sex=='f'
   end
 
   def total_of_galleries

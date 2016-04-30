@@ -9,8 +9,8 @@
             <% end %>
          </div>
     </div>
-    <div class="two wide column"></div>    
-    <div class="ten wide column">
+
+    <div class="twelve wide column">
       <%= form_for @user, url: users_update_profile_path , html:{ class: 'ui form' } do |form| %>
           <% if flash[:error] %>
               <div class="ui negative message transition">
@@ -32,9 +32,8 @@
           <% end %>
           <div class="ui grid">
             <div class="row">
-              <div class="seven wide column">
+              <div class="five wide column">
                 <div class="ui medium image">
-
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
@@ -43,7 +42,6 @@
                       </div>
                     </div>
                   </div>
-
                   <% if @user.avatar.nil? || @user.avatar.blank? %>
                       <%= image_tag 'nopic.png', size: '300x300', class: "ui medium image" %>
                   <% else %>
@@ -51,8 +49,8 @@
                   <% end %>
                 </div>
               </div>
-              <div class="nine wide column">
-                <div class="three fields">
+              <div class="eleven wide column">
+                <div class="four fields">
                   <div class="field">
                     <label>Nombre</label>
                     <%= form.text_field :name, placeholder: 'Nombre' if @user.name.blank?%>
@@ -65,8 +63,26 @@
                   </div>
                   <div class="field">
                     <label>Sexo</label>
-                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} if @user.sex.blank?%>
-                    <%= form.select :sex, [['Selecione una opción'], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown disabled'} if !@user.sex.blank?%>
+                    <% if @user.sex.blank? %>
+                        <%= form.select :sex, [['Selecione una opción', ""], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} if @user.sex.blank?%>
+                    <% else %>
+                        <select class="ui dropdown disabled">
+                          <option><%= form.label @user.sex_humanize  %></option>
+                        </select>
+                    <% end %>
+                  </div>
+                  <div class="field">
+                    <label>País</label>
+                    <% if @user.country.blank? %>
+                        <%= form.select :country, [['Seleccione país', ""]],{disabled: "Seleccione país"},{class: "ui dropdown"} do %>
+                            <%= render 'country_list' %>
+                        <% end %>
+                    <% else %>
+                        <div class="ui dropdown disabled">
+                          <option><i class="<%= @user.country %> flag"></i></option>
+                        </div>
+                    <% end %>
+
                   </div>
                 </div>
                 <div class="two fields">
