@@ -59,17 +59,13 @@ class User
   end
 
   def is_phone_correct_format
-    #phone_numbers_new = Array.new
     format = /(([(])([+])([0-9]{3})([)])-?)?([0-9]{8})/
     self.phones.each do |phone|
       if !phone.match(format)
         errors.add(:phones_list, "Formato de telefono incorrecto \n el formato puede ser: (+123)12345678 o 12345678")
         break
-     # else
-     #   phone_numbers_new.append(phone)
       end
     end
-    #phone_numbers = phone_numbers_new
   end
 
   def phones_list=(phone_numbers)

@@ -26,5 +26,6 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'photoswipe-rails'
 gem "jquery-fileupload-rails"
 gem 'aws-sdk', '~> 1.3.4'
+gem 'paperclip-watermark'
 gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
 gem 'rack-cache', :require => 'rack/cache'

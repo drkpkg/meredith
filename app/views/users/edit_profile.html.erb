@@ -12,8 +12,19 @@
     <div class="two wide column"></div>    
     <div class="ten wide column">
       <%= form_for @user, url: users_update_profile_path , html:{ class: 'ui form' } do |form| %>
-          <% if !@user.errors.blank? %>
-              <%= render 'general/message_error', locals: { user: @user } %>
+          <% if flash[:error] %>
+              <div class="ui negative message transition">
+                <i class="close icon"></i>
+                <div class="header">Error al registrarte</div>
+                <p>Por favor, revisa los datos en el formulario:</p>
+                <ul class="list">
+                  <% flash[:error].each do |attr, msg| %>
+                      <% msg.each do |value| %>
+                          <li><%= value %></li>
+                      <% end %>
+                  <% end %>
+                </ul>
+              </div>
           <% end %>
           <h4 class="ui dividing header">Editar mi información</h4>
           <% if @user.is_profile_complete == false %>
