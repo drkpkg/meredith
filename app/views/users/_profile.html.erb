@@ -16,16 +16,22 @@
       <% if @user.avatar.blank? %>
           <%= image_tag 'nopic.png' %>
       <% else %>
-          <%= image_tag @user.avatar %>
+          <%= image_tag @user.avatar(:small) %>
       <% end %>
     </div>
 
     <div class="content">
       <div class="description">
-        <%= @user.alias %>
+        <span class="left floated">
+          <% if @user.alias.blank? %>
+            <i class="big spy icon pup" data-content="Sin alias D:"></i>
+          <% else %>
+            <i class="big user icon"></i><%= @user.alias %>
+          <% end %>
+        </span>
         <span class="right floated">
-        17
-        <i class="big heart outline like icon pup" data-content="17 Personas te siguen"></i>
+        <%= @user.has_follow_users %>
+        <i class="big empty star outline icon pup" data-content="<%= @user.has_follow_users %> Personas te siguen"></i>
       </span>
       </div>
     </div>

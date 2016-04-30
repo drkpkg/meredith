@@ -10,13 +10,24 @@ class User
   attr_accessor :password, :password_confirmation
 
   #Paperclip attachment
-  has_mongoid_attached_file :avatar
+  has_mongoid_attached_file :avatar,
+                            styles: {
+                                thumb: '150x150',
+                                small: '350x300',
+                                medium: '550x500',
+                                original: {
+                                    geometry: '800>'
+                                }
+                            },
+                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
 
   #Data model
   field :email, type: String
   field :password_hash, type: String
   field :user_type, type: String
   field :terms, type: Boolean
+  field :follow_users, type: Array, default: []
   field :address, type: String, default: ''
   field :alias, type: String, default: ''
   field :name, type: String, default: ''
@@ -24,7 +35,6 @@ class User
   field :lastname, type: String, default: ''
   field :phones, type: Array, default: []
   field :social_networks, type: Hash, default: {'Facebook':'','Twitter':'','Instagram':'', 'Pinterest':'', 'Tumblr':''}
-  field :social_events, type: Array, default: []
   field :is_profile_complete, type: Boolean, default: false
 
   #Relations
@@ -42,7 +52,6 @@ class User
   validates_presence_of :lastname, message: "Apellido no puede estar vacío", on: :update
   validates_presence_of :sex, message: "Tiene que seleccionar un género", on: :update
   validates_presence_of :address, message: "Dirección no puede estar vacía", on: :update
-  #validates_format_of :phone, with: /\A(([(])([+])([0-9]{3})([)])-?)?([0-9]{8})\z/i, message: "Formato de telefono incorrecto \n el formato puede ser: (+123)12345678 o 12345678", on: :update
   validates_format_of :email, with:  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, message: "Formato de correo no válido", on: :update
   validates_format_of :name, with:  /\A([a-z A-Z]*)\Z/i, message: "Nombre solo debe contener letras", on: :update
   validates_format_of :lastname, with:  /\A([a-z A-Z]*)\Z/i, message: "Apellido solo debe contener letras", on: :update
@@ -55,28 +64,35 @@ class User
   end
 
   def password_equality
-      errors.add(:password, "Las contraseñas no coinciden") if password != password_confirmation
+    errors.add(:password, "Las contraseñas no coinciden") if password != password_confirmation
   end
 
   def is_phone_correct_format
-    format = /(([(])([+])([0-9]{3})([)])-?)?([0-9]{8})/
+    format = /(([(])([+])([0-9]{3})([)])-?)?([0-9]{7,8})/
     self.phones.each do |phone|
       if !phone.match(format)
-        errors.add(:phones_list, "Formato de telefono incorrecto \n el formato puede ser: (+123)12345678 o 12345678")
+        errors.add(:phones_list, "Formato de telefono incorrecto \n el formato aceptado es: (+123)12345678 o 12345678")
         break
       end
     end
   end
 
-  def phones_list=(phone_numbers)
-    phone_numbers = phone_numbers.reject { |c| c.empty? }
-    phone_numbers = phone_numbers.uniq
-    self.phones = phone_numbers
+  def phones_list=(arg)
+    if !arg.nil?
+      arg.each do |value|
+        self.phones.push(value)
+      end
+      self.phones = self.phones.uniq
+    end
   end
 
-  # def phones_list
-  #   self.phones.join(', ')
-  # end
+  def phones_list
+    self.phones.join(', ')
+  end
+
+  def has_follow_users
+    self.follow_users.length
+  end
 
   def social_networks_list=(social_networks)
     self.social_networks = social_networks
@@ -85,7 +101,7 @@ class User
   def social_networks_list
     self.social_networks
   end
-  
+
   def password
     @password ||= Password.new(password_hash)
   end
@@ -97,5 +113,18 @@ class User
 
   def complete_name
     self.name + " " + self.lastname
+  end
+
+  def total_of_galleries
+    galleries = Event.where(user_id: self.id).count
+  end
+
+  def total_of_photos
+    galleries = Event.where(user_id: self.id)
+    total = 0
+    galleries.each do |gallery|
+      total = total + Photo.where(event_id: gallery.id).count
+    end
+    total
   end
 end

@@ -47,10 +47,8 @@ class UsersController < ApplicationController
     redirect_to signup_path, notice: "Te vamos a extrañar, muack"
   end
 
-  def block_profile
-  end
-
   def follow_profile
+
   end
 
   def suscribe_event
@@ -67,7 +65,12 @@ class UsersController < ApplicationController
   end
   
   def set_user
-    @user = User.find_by(id: current_user.id)
+    if current_user.nil?
+      cookies.delete(:idbmeredith)
+      redirect_to root_path
+    else
+      @user = User.find_by(id: current_user.id)
+    end
   end
 
   def set_params(params)

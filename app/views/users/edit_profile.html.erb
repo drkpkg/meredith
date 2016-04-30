@@ -47,7 +47,7 @@
                   <% if @user.avatar.nil? || @user.avatar.blank? %>
                       <%= image_tag 'nopic.png', size: '300x300', class: "ui medium image" %>
                   <% else %>
-                      <%= image_tag @user.avatar, size: '300x300', class: "ui medium image"  %>
+                      <%= image_tag @user.avatar(:small), class: "ui medium image"  %>
                   <% end %>
                 </div>
               </div>

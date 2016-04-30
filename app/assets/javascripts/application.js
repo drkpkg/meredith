@@ -22,5 +22,37 @@ $(document).on('ready page:load', function() {
     $('.ui.dropdown').dropdown();
     $('.message .transition').on('click', function() {
         $(this).closest('.message').transition('fade');
-    });     
+    });
+    $('.message.transition').on('click', function() {
+        return $(this).closest('.message').transition('fade');
+    });
+
+    $('.ui.dropdown').dropdown();
+
+    $('.ui.image').dimmer({
+        on: 'hover'
+    });
+
+    $('.profile').dimmer({
+        on: 'hover'
+    });
+
+    $('.pup').popup();
+
+    $('.add').unbind('click').click(function() {
+        var input_text;
+        input_text = '<div class="field"><div class="ui mini action input"><input type="text" id="user_phones_list" name="user[phones_list][]"><a href="#" class="ui teal right icon button" data-content="Eliminar este campo" onclick="delete_input(this)"><i class="delete icon"></i></a></div></div>';
+        return $('#phone_numbers').append(input_text);
+    });
+
+    $('.sequenced .card').hover(
+        function(){
+            $(this).transition({
+                debug     : false,
+                animation : 'tada',
+                duration  : 500,
+                interval  : 200
+            })
+        }
+    ).off( "mouseleave" );
 });

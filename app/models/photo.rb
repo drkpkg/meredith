@@ -5,7 +5,7 @@ class Photo
 
   field :event_id, type: String
   field :description, type: String
-
+  field :likes, type: Array, default: []
   has_mongoid_attached_file :image,
                             processors: [:watermark],
                             styles: {
@@ -28,6 +28,11 @@ class Photo
   def image_with_watermark
     converter = ImageObject.new
     self.image.path = converter.add_watermark(self.image.path, ActionController::Base.helpers.asset_path('logo'))
+  end
+
+  def has_likes
+    return 0 if self.likes.empty?
+    self.likes.lenght
   end
 
 end

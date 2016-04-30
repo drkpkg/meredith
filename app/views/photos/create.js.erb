@@ -1,4 +1,2 @@
-$("#progress").hide();
-$("#loading-message").hide();
 $("#gallery").empty().append("<%= j render 'photos/index', locals:{id: @user_id, event_id: @event_id} %>");
 $('.pup').popup();

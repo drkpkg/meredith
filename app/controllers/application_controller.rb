@@ -18,8 +18,10 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_user
-    if !session[:current_user_id].nil? and cookies.signed[:idbmeredith].nil?
+    if session[:current_user_id].nil? and !cookies.signed[:idbmeredith].nil?
       session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
+    else
+      session[:current_user_id] = nil
     end
   end
 end

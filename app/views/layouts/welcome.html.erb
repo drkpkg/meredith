@@ -21,16 +21,15 @@
     <% else %>
 
         <div class="ui dropdown item" tabindex="0">
-          <%= image_tag 'nopic.png', size: '20x20',class:'ui avatar image'%>
-          <%= User.find_by(id: cookies.signed[:idbmeredith]['$oid']).email %>
+          <% user = User.find_by(id: cookies.signed[:idbmeredith]['$oid']) %>
+          <%= image_tag user.avatar(:thumb),class:'ui avatar image'%>
+          <%= user.email %>
           <i class="dropdown icon"></i>
           <div class="menu transition hidden" tabindex="-1">
-            <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}",class: 'ui item' do %>
-                <!--Luego voy a poner su imagen-->
-                <i class="user icon"></i>
-                Yop
+            <%= link_to "me/#{user.id}",class: 'ui item' do %>
+                <i class="user icon"></i>Yop
             <% end %>
-            <%= link_to "me/#{cookies.signed[:idbmeredith]['$oid']}", class: 'item' do %>
+            <%= link_to "me/#{user.id}", class: 'item' do %>
                 <i class="cogs icon"></i> configuración
             <% end%>
             <div class="divider"></div>

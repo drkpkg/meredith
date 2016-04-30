@@ -16,7 +16,7 @@
                 <div class="content">
                   <div class="center">
                     <%= link_to event_path(@user), class: 'ui button' do %>
-                        <i class="big list icon"></i> Mis eventos
+                        <i class="big list icon"></i> Mis galerías
                     <% end %>
                   </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="content">
                   <div class="center">
                     <%= link_to event_new_path(@user), class: 'ui button' do %>
-                        <i class="big list icon"></i> Registrar nuevo evento
+                        <i class="big list icon"></i> Registrar nueva galería
                     <% end %>
                   </div>
                 </div>
@@ -45,15 +45,45 @@
 
       <div class="ui fluid card">
         <div class="content">
-          <a class="header">Mis estadísticas</a>
+          <div class="header"><i class="big area chart icon"></i>Información nutricional</div>
         </div>
         <div class="content">
-          Aquí vendrán las estadísticas de usuario
-          <ul>
-            <li>Imagenes vendidas</li>
-            <li>Imagenes totales</li>
-            <li>Promedio de imagenes por evento</li>
-          </ul>
+
+          <div class="ui grid">
+            <div class="row">
+              <div class="sixteen wide column">
+                <div class="ui three sequenced cards">
+                  <div class="red card">
+                    <div class="header">Total de galerías</div>
+                    <div class="content">
+                      <i class="huge archive icon"></i>
+                      <div class="description">
+                        <h1><%= @user.total_of_galleries %></h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="blue card">
+                    <div class="header">Total de fotografías</div>
+                    <div class="content">
+                      <i class="huge photo icon"></i>
+                      <div class="description">
+                        <h1><%= @user.total_of_photos %></h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="green card">
+                    <div class="header">Fotografías vendidas</div>
+                    <div class="content">
+                      <i class="huge money icon"></i>
+                      <div class="description">
+                        <h1> 0 </h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

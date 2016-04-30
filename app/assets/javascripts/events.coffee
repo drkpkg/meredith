@@ -7,10 +7,9 @@ ready = ->
   $('#new_photo').fileupload
     dataType: 'script'
     progressall: (e, data) ->
-      $("#progress").show()
       $("#loading-message").show()
-      progress = Math.trunc(data.loaded/data.total * 100)
-      $('#progress .meter').css('width', progress + '%')
+    stop: (e, data) ->
+      $("#loading-message").hide();
 
 $(document).on('ready', ready)
 $(window).bind('page:change', ready)
