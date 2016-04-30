@@ -1,52 +1,52 @@
 <% title "Generar nueva galería" %>
 
 <div class="ui grid">
-    <div class="row">
-        <div class="four wide column">
-            <div class="ui small vertical menu">
-                <%= link_to me_path(params[:id]), class:"item" do %>
-                    <i class="dashboard icon"></i> Dashboard
-                <% end %>
-                <%= link_to event_path(params[:id], params[:event_id]), class:"item" do %>
-                    <i class="camera retro icon"></i> Galerías
-                <% end %>
-            </div>
-        </div>
-        <div class="eight wide column">
-            <% if flash[:error] %>
-                <div class="ui negative message transition">
-                    <i class="close icon"></i>
-                    <div class="header">Error registrar galería</div>
-                    <p>Por favor, revisa los datos:</p>
-                    <ul class="list">
-                        <% flash[:error].each do |attr, msg| %>
-                            <% msg.each do |value| %>
-                                <li><%= value %></li>
-                            <% end %>
-                        <% end %>
-                    </ul>
-                </div>                
-            <% end %>
-            <div class="ui two top attached steps">
-                <div class="active step">
-                    <i class="info circle icon"></i>
-                    <div class="content">
-                        <div class="title">Registra</div>
-                        <div class="description">Nombre y descripción de la galería</div>            
-                    </div>
-                </div>
-                <div class="step">
-                <i class="camera retro icon"></i>
-                    <div class="content">
-                        <div class="title">Agrega</div>
-                        <div class="description">Agrega fotografías a tu galería</div>            
-                    </div>
-                </div>
-            </div>  
-            <div class="field">
-                <%= render "form" %>
-            </div>   
-        </div>
-        <div class="four wide column"></div>                
+  <div class="row">
+    <div class="four wide column">
+      <div class="ui small vertical menu">
+        <%= link_to me_path(params[:id]), class:"item" do %>
+            <i class="dashboard icon"></i> Dashboard
+        <% end %>
+        <%= link_to event_path(params[:id], params[:event_id]), class:"item" do %>
+            <i class="camera retro icon"></i> Galerías
+        <% end %>
+      </div>
     </div>
+    <div class="eight wide column">
+      <% if flash[:error] %>
+          <div class="ui negative message transition">
+            <i class="close icon"></i>
+            <div class="header">Error registrar galería</div>
+            <p>Por favor, revisa los datos:</p>
+            <ul class="list">
+              <% flash[:error].each do |attr, msg| %>
+                  <% msg.each do |value| %>
+                      <li><%= value %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <div class="ui two top attached steps">
+        <div class="active step">
+          <i class="info circle icon"></i>
+          <div class="content">
+            <div class="title">Registra</div>
+            <div class="description">Nombre y descripción de la galería</div>
+          </div>
+        </div>
+        <div class="step">
+          <i class="camera retro icon"></i>
+          <div class="content">
+            <div class="title">Agrega</div>
+            <div class="description">Agrega fotografías a tu galería</div>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <%= render "form" %>
+      </div>
+    </div>
+    <div class="four wide column"></div>
+  </div>
 </div>

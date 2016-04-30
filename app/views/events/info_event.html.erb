@@ -20,6 +20,22 @@
             <p><%= flash[:success] %></p>
           </div>
       <% end %>
+      <div class="ui two top attached steps">
+        <div class="completed step">
+          <i class="info circle icon"></i>
+          <div class="content">
+            <div class="title">Registra</div>
+            <div class="description">Nombre y descripción de la galería</div>
+          </div>
+        </div>
+        <div class="active step">
+          <i class="camera retro icon"></i>
+          <div class="content">
+            <div class="title">Agrega</div>
+            <div class="description">Agrega fotografías a tu galería</div>
+          </div>
+        </div>
+      </div>
       <div class="ui fluid card">
         <div class="content">
           <a class="header"><%= @event.event_name %></a>

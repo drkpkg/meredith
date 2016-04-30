@@ -8,7 +8,11 @@
         <div class="content">
           <div class="center">
             <%= link_to me_edit_path(@user), class: 'ui button' do %>
-                <i class="big edit icon"></i> Editar mi perfil
+                <i class="big icons">
+                  <i class="user icon"></i>
+                  <i class="edit corner icon"></i>
+                </i>
+                Editar mi perfil
             <% end %>
           </div>
         </div>
@@ -30,8 +34,10 @@
           <% end %>
         </span>
         <span class="right floated">
-        <%= @user.has_follow_users %>
-        <i class="big empty star outline icon pup" data-content="<%= @user.has_follow_users %> Personas te siguen"></i>
+        <i class="big icons">
+          <i class="empty star outline icon pup" data-content="<%= @user.has_follow_users %> Personas te siguen"></i>
+          <i class="corner icon"><%= @user.has_follow_users %></i>
+        </i>
       </span>
       </div>
     </div>
