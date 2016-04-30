@@ -127,4 +127,13 @@ class User
     end
     total
   end
+
+  def total_of_medium_images_per_gallery
+    galleries = Event.where(user_id: self.id)
+    total = 0
+    galleries.each do |gallery|
+      total = total + Photo.where(event_id: gallery.id).count
+    end
+    total/galleries.count
+  end
 end

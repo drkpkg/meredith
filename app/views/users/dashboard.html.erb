@@ -49,40 +49,31 @@
 
       <div class="ui fluid card">
         <div class="content">
-          <div class="header"><i class="big area chart icon"></i>Información nutricional</div>
+          <div class="header"><i class="big pie chart icon"></i>Información nutricional</div>
         </div>
         <div class="content">
-
           <div class="ui grid">
             <div class="row">
               <div class="sixteen wide column">
-                <div class="ui three sequenced cards">
-                  <div class="red card">
-                    <div class="header">Total de galerías</div>
-                    <div class="content">
-                      <i class="huge icons">
-                        <i class="grey archive icon"></i>
-                        <i class="corner icon"><%= @user.total_of_galleries %></i>
-                      </i>
-                    </div>
-                  </div>
-                  <div class="blue card">
-                    <div class="header">Total de fotografías</div>
-                    <div class="content">
-                      <i class="huge icons">
-                        <i class="grey photo icon"></i>
-                        <i class="corner icon"><%= @user.total_of_photos %></i>
-                      </i>
-                    </div>
-                  </div>
-                  <div class="green card">
-                    <div class="header">Fotografías vendidas</div>
-                    <div class="content">
-                      <i class="huge icons">
-                        <i class="grey money icon"></i>
-                        <i class="corner icon">0</i>
-                      </i>
-                    </div>
+                <%= render 'information' %>
+              </div>
+            </div>
+          </div>
+          <div class="ui grid">
+            <div class="row">
+              <div class="sixteen wide column">
+                <div class="green ui fluid card">
+                  <div class="header">Media de fotografías por galería</div>
+                  <div class="content">
+                    <i class="massive icons">
+                      <i class="camera retro icon"></i>
+                      <i class="corner inverted icon"><%= @user.total_of_medium_images_per_gallery %></i>
+                    </i>
+                    <h1>
+                      <label class="pup" data-content="Recuerda que esta medición es aproximada entre todas tus galerías de fotografías">
+                        Imágenes por galería
+                      </label>
+                    </h1>
                   </div>
                 </div>
               </div>
@@ -90,7 +81,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="two wide column"></div>
   </div>
