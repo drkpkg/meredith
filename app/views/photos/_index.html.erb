@@ -1,16 +1,30 @@
+<div id="loading-message" class="ui active dimmer">
+  <div class="ui text loader">
+    Subiendo las imágenes, espera :D
+  </div>
+</div>
+
 <% @photos.each do |photo| %>
     <div class="card">
+      <div class="content">
+        <div class="right floated">
+          <%= link_to photo_delete_path(locals[:id], locals[:event_id], photo.id), method: :delete, remote: true, data:{confirm: "¿Estás seguro de borrar esta foto de la galería?", content: "Eliminar de la galería"}, class:'pup' do %>
+              <i class="delete icon"></i>
+          <% end %>
+        </div>
+      </div>
       <div class="image">
         <a href="#">
           <%= image_tag photo.image.url(:small), class: 'ui medium bordered image ' %>
         </a>
       </div>
-      <div class="extra content">
-        <div class="right floated">
-          <%= button_to photo_delete_path(locals[:id], locals[:event_id], photo.id), method: :delete, remote: true, data:{confirm: "¿Estás seguro de borrar esta foto de la galería?", content: "Eliminar de la galería"}, class:'small red ui button pup' do %>
-              <i class="delete icon"></i>
-          <% end %>
+      <div class="content">
+        <div class="left floated">
+          <%= photo.image_file_size/1000 %> kb
         </div>
+      </div>
+      <div class="extra content">
+        <%= photo.image_fingerprint %>
       </div>
     </div>
 <% end %>

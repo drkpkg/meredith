@@ -19,23 +19,48 @@
           <div class="ui cards">
             <% @events.each do |event| %>
                 <div class="ui card">
+                  <div class="content">
+                    <div class="right floated">
+                      <%= link_to event_delete_path(event.id), class:"pup", data:{content:"Eliminar galería"}, method: :delete do %>
+                          <i class="delete icon"></i>
+                      <% end %>
+                    </div>
+                  </div>
                   <div class="blurring dimmable image profile">
                     <div class="ui dimmer">
                       <div class="content">
                         <div class="center">
                           <div class="ui buttons">
                             <%= link_to event.event_name, event_info_path(event.user.id, event.id), class:"blue ui button" %>
-                            <%= link_to event_delete_path(event.id), class:"red ui button pup", data:{content:"Eliminar galería"}, method: :delete do %>
-                                <i class="delete icon"></i>
-                            <% end %>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <%= image_tag 'gallery.jpg' %>
+                    <% photos = Photo.where(event_id: event.id) %>
+
+                    <% case event.total_photos %>
+                    <% when 0 %>
+                        <%= image_tag 'gallery.jpg' %>
+                    <% when 1 %>
+                        <%= image_tag photos.first.image(:thumb) %>
+                    <% when 2 %>
+                        <div id="photos">
+                          <% 2.times do |pos| %>
+                              <%= image_tag photos[pos].image(:thumb) %>
+                          <% end %>
+                        </div>
+                    <% when 3..event.total_photos %>
+                        <div id="photos">
+                          <% event.total_photos.times do |pos| %>
+                              <%= image_tag photos[pos].image(:thumb) %>
+                          <% end %>
+                        </div>
+                    <% end %>
                   </div>
                   <div class="extra content">
-                    <i class="photo icon"></i><%= event.total_photos %> fotografías
+                    <div class="left floated">
+                      <i class="photo icon"></i><%= event.total_photos %> fotografías
+                    </div>
                   </div>
                 </div>
             <% end %>

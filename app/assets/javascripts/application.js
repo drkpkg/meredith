@@ -29,6 +29,8 @@ $(document).on('ready page:load', function() {
 
     $('.ui.dropdown').dropdown();
 
+    $('.ui.accordion').accordion();
+
     $('.ui.image').dimmer({
         on: 'hover'
     });

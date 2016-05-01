@@ -22,6 +22,7 @@ class Photo
 
   validates_attachment_content_type :image,
                                     :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  #validates_uniqueness_of :image_fingerprint, message: "La imagen existe en la galería"
 
   belongs_to :event
 

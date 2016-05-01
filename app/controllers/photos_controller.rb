@@ -7,10 +7,10 @@ class PhotosController < ApplicationController
 
   def create
     params[:photo][:image].each do |new_photo|
-      photo = Photo.new
-      photo.event_id = params[:event_id]
-      photo.image = new_photo
-      photo.save
+      @photo = Photo.new
+      @photo.event_id = params[:event_id]
+      @photo.image = new_photo
+      @photo.save
     end
     @user_id = params[:id]
     @event_id = params[:event_id]
