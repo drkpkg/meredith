@@ -1,4 +1,4 @@
-<% title "Mi galería" %>
+<% title @event.event_name %>
 <div class="row">
   <div class="ui grid">
     <div class="two wide column">
@@ -46,20 +46,14 @@
                 <label>Puedes usar el navegador de archivos o puedes arrastrar aqui las fotos y se cargarán automáticamente.</label>
               </div>
               <%= form.file_field :photo,multiple: true,remote: true,name: "photo[image][]",class: "ui button" %>
-              <!--div id="loading-message">
-                <div class="ui icon message">
-                  <i class="notched circle loading icon"></i>
-                  <div class="content">
-                    <div class="header">
-                      Espera!
-                    </div>
-                    <p>Estamos subiendo las imágenes con polvo de hadas :D</p>
-                  </div>
-                </div>
-              </div-->
           <% end %>
         </div>
         <div class="extra content">
+            <div id="loading-message" class="ui active dimmer">
+                <div class="ui text loader">
+                    Subiendo las imágenes, espera :D
+                </div>
+            </div>
           <div id="gallery" class="ui cards">
             <%= render 'photos/index', locals:{id: params[:id], event_id: params[:event_id]} %>
           </div>

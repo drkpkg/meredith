@@ -27,6 +27,10 @@ $(document).on('ready page:load', function() {
         return $(this).closest('.message').transition('fade');
     });
 
+    $('.ui.sticky').sticky();
+    
+    $('.menu .item').tab();
+
     $('.ui.dropdown').dropdown();
 
     $('.ui.accordion').accordion();
