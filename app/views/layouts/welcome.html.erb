@@ -19,7 +19,6 @@
         <%= link_to "Iniciar Sesión", login_path, class: 'ui item' %>
         <%= link_to "Registrarse", signup_path, class: 'ui item' %>
     <% else %>
-
         <div class="ui dropdown item" tabindex="0">
           <% user = User.find_by(id: cookies.signed[:idbmeredith]['$oid']) %>
           <%= image_tag user.avatar(:thumb),class:'ui avatar image'%>
