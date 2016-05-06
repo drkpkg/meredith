@@ -6,34 +6,41 @@ class Photo
   field :event_id, type: String
   field :description, type: String
   field :likes, type: Array, default: []
-  has_mongoid_attached_file :image,
+  has_mongoid_attached_file :image_original, 
+                            styles:{
+                                original: ["100%",:jpg]
+                            },
+                            :url => "/files/:class/:attachment/original/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/original/:id/:style/:basename.:extension"
+
+  has_mongoid_attached_file :image_processed,
                             processors: [:watermark],
                             styles: {
-                                thumb: '150x150',
-                                small: '350x300',
-                                medium: '550x500',
-                                original: {
-                                    geometry: '800>',
-                                    watermark_path: "#{Rails.root}/public/images/logo.gif"
-                                }
+                                thumb: ['150x150', :jpg],
+                                small: ['350x300', :jpg],
+                                medium: ['550x500', :jpg],
+                                original: [{
+                                    geometry: '60%',
+                                    watermark_path: "#{Rails.root}/public/images/logo.gif", position: "Center"
+                                }, :jpg]
                             },
-                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
+                            :url => "/files/:class/:attachment/processed/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/processed/:id/:style/:basename.:extension"
 
-  validates_attachment_content_type :image,
-                                    :content_type => ["image/jpg", "image/jpeg", "image/png"]
-  #validates_uniqueness_of :image_fingerprint, message: "La imagen existe en la galería"
-
+  
+  validates_attachment_size :image_original, :image_processed, :in => 0.megabytes..500.megabytes
+  validates_attachment_content_type :image_original, :image_processed,
+                                    :content_type => ["image/jpg", "image/jpeg", "image/png", "image/tif"], message: "Formato incorrecto"
+  
   belongs_to :event
-
-  def image_with_watermark
-    converter = ImageObject.new
-    self.image.path = converter.add_watermark(self.image.path, ActionController::Base.helpers.asset_path('logo'))
-  end
 
   def has_likes
     return 0 if self.likes.empty?
     self.likes.lenght
+  end
+  
+  def original_size
+    Paperclip::Geometry.from_file(self.image_original.path)
   end
 
 end

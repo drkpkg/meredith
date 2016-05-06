@@ -1,9 +1,3 @@
-<div id="loading-message" class="ui active dimmer">
-  <div class="ui text loader">
-    Subiendo las imágenes, espera :D
-  </div>
-</div>
-
 <% @photos.each do |photo| %>
     <div class="card">
       <div class="content">
@@ -15,16 +9,19 @@
       </div>
       <div class="image">
         <a href="#">
-          <%= image_tag photo.image.url(:small), class: 'ui medium bordered image ' %>
+          <%= image_tag photo.image_original.url, class: 'ui medium bordered image ' %>
         </a>
       </div>
       <div class="content">
-        <div class="left floated">
-          <%= photo.image_file_size/1000 %> kb
+        <div class="left floated pup" data-content="Tamaño de la imagen">
+          <%= photo.image_original_file_size/1000 %> kb
+        </div>
+        <div class="right floated pup" data-content="Resolución de la imagen">
+          <%= photo.original_size %>
         </div>
       </div>
-      <div class="extra content">
-        <%= photo.image_fingerprint %>
+      <div class="extra content pup" data-content="Identificador único de la imagen">
+        <%= photo.image_original_fingerprint %>
       </div>
     </div>
 <% end %>

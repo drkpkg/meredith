@@ -37,7 +37,7 @@ class User
   field :phones, type: Array, default: []
   field :social_networks, type: Hash, default: {'Facebook':'','Twitter':'','Instagram':'', 'Pinterest':'', 'Tumblr':''}
   field :is_profile_complete, type: Boolean, default: false
-
+  
   #Relations
   has_many :events, dependent: :delete
   #Uniqueness validators

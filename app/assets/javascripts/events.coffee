@@ -8,8 +8,10 @@ ready = ->
     dataType: 'script'
     progressall: (e, data) ->
       $("#loading-message").show()
+      $("#gallery").hide()
     stop: (e, data) ->
       $("#loading-message").hide();
+      $("#gallery").show();
 
 $(document).on('ready', ready)
 $(window).bind('page:change', ready)
