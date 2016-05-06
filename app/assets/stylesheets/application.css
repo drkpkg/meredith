@@ -16,6 +16,7 @@
  *= require jquery.fileupload-ui
  *= require_self
  */
+
 .test{
     height: 500px;
 }

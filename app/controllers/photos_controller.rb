@@ -9,7 +9,8 @@ class PhotosController < ApplicationController
     params[:photo][:image].each do |new_photo|
       @photo = Photo.new
       @photo.event_id = params[:event_id]
-      @photo.image = new_photo
+      @photo.image_original = new_photo      
+      #@photo.image_processed = @photo.image_original
       @photo.save
     end
     @user_id = params[:id]

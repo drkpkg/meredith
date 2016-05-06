@@ -20,30 +20,35 @@
             <p><%= flash[:success] %></p>
           </div>
       <% end %>
-      <div class="ui two top attached steps">
-        <div class="completed step">
-          <i class="info circle icon"></i>
-          <div class="content">
-            <div class="title">Registra</div>
-            <div class="description">Nombre y descripción de la galería</div>
+      <% if @event.total_photos == 0 %>
+        <div class="ui two top attached steps">
+          <div class="completed step">
+            <i class="info circle icon"></i>
+            <div class="content">
+              <div class="title">Heyo!</div>
+              <div class="description">Esta galería esta lista</div>
+            </div>
+          </div>
+            <div class="active step">
+              <i class="camera retro icon"></i>
+            <div class="content">
+                <div class="title"></div>
+                <div class="description">Agrega fotografías a tu galería</div>
+            </div>
           </div>
         </div>
-        <div class="active step">
-          <i class="camera retro icon"></i>
-          <div class="content">
-            <div class="title">Agrega</div>
-            <div class="description">Agrega fotografías a tu galería</div>
-          </div>
-        </div>
-      </div>
+      <% end %>
       <div class="ui fluid card">
         <div class="content">
-          <a class="header"><%= @event.event_name %></a>
+          <label class="header"><%= @event.event_name %></label>
         </div>
         <div class="content">
           <%= form_for Photo.new, url: photo_create_path(id: params[:id], event_id: params[:event_id]) do |form| %>
-              <div class="content">
-                <label>Puedes usar el navegador de archivos o puedes arrastrar aqui las fotos y se cargarán automáticamente.</label>
+              <div class="content centered">
+                <i class="huge icons pup" data-content="Arrastra aquí tus fotos!">
+                  <i class="grey upload icon"></i>
+                </i>
+                <label>Arrastra aquí tus fotos!</label>
               </div>
               <%= form.file_field :photo,multiple: true,remote: true,name: "photo[image][]",class: "ui button" %>
           <% end %>
