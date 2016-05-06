@@ -140,6 +140,7 @@ class User
     galleries.each do |gallery|
       total = total + Photo.where(event_id: gallery.id).count
     end
-    total/galleries.count
+    return total/galleries.count if total_of_galleries > 0
+    return total
   end
 end

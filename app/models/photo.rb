@@ -6,12 +6,10 @@ class Photo
   field :event_id, type: String
   field :description, type: String
   field :likes, type: Array, default: []
-  has_mongoid_attached_file :image_original, 
-                            styles:{
-                                original: ["100%",:jpg]
-                            },
-                            :url => "/files/:class/:attachment/original/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/files/:class/:attachment/original/:id/:style/:basename.:extension"
+  has_mongoid_attached_file :image_original,
+                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension" ,
+                            :preserve_files => "false"
 
   has_mongoid_attached_file :image_processed,
                             processors: [:watermark],
@@ -19,20 +17,27 @@ class Photo
                                 thumb: ['150x150', :jpg],
                                 small: ['350x300', :jpg],
                                 medium: ['550x500', :jpg],
-                                original: [{
-                                    geometry: '60%',
-                                    watermark_path: "#{Rails.root}/public/images/logo.gif", position: "Center"
-                                }, :jpg]
+                                original: {geometry: '60%',watermark_path: "#{Rails.root}/public/images/logo.gif", position: "Center"}
                             },
-                            :url => "/files/:class/:attachment/processed/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/files/:class/:attachment/processed/:id/:style/:basename.:extension"
+                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension",
+                            :preserve_files => "false"
 
-  
-  validates_attachment_size :image_original, :image_processed, :in => 0.megabytes..500.megabytes
-  validates_attachment_content_type :image_original, :image_processed,
-                                    :content_type => ["image/jpg", "image/jpeg", "image/png", "image/tif"], message: "Formato incorrecto"
-  
+  validates_attachment_size :image_original,
+                            :in => 0.megabytes..500.megabytes,
+                            message: "El tamaño del archivo es muy grande"
+
+  validates_attachment_file_name :image_original,
+                                 matches: [/png\Z/, /jpe?g\Z/, /iiq\Z/, /IIQ\Z/],
+                                 message: "Formato no válido de imagen"
+
+  validates_attachment_content_type :image_original,
+                                    content_type: /\Aimage/,
+                                    message: "El archivo no es una imagen"
+
   belongs_to :event
+
+  before_destroy :delete_all_shit
 
   def has_likes
     return 0 if self.likes.empty?
@@ -41,6 +46,11 @@ class Photo
   
   def original_size
     Paperclip::Geometry.from_file(self.image_original.path)
+  end
+
+  def delete_all_shit
+    File.delete(Rails.root + "public/files/photos/original/#{self.id}/*")
+    File.delete(Rails.root + "public/files/photos/processed/#{self.id}/*")
   end
 
 end

@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
       @photo = Photo.new
       @photo.event_id = params[:event_id]
       @photo.image_original = new_photo      
-      #@photo.image_processed = @photo.image_original
+      @photo.image_processed = new_photo
       @photo.save
     end
     @user_id = params[:id]
@@ -20,7 +20,6 @@ class PhotosController < ApplicationController
   def delete
     @user_id = params[:id]
     @event_id = params[:event_id]
-
     photo = Photo.find_by(id: params[:image_id])
     photo.destroy
   end

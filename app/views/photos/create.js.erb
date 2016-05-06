@@ -1,3 +1,7 @@
+<% if !@photo.errors.blank? %>
+alert("<%= @photo.errors.messages %>");
+<% else %>
 $("#gallery").empty().append("<%= j render 'photos/index', locals:{id: @user_id, event_id: @event_id} %>");
 $('.pup').popup();
 $("#load-messages").empty();
+<% end %>
