@@ -4,4 +4,5 @@ alert("<%= @photo.errors.messages %>");
 $("#gallery").empty().append("<%= j render 'photos/index', locals:{id: @user_id, event_id: @event_id} %>");
 $('.pup').popup();
 $("#load-messages").empty();
+$("#initial-message").remove();
 <% end %>

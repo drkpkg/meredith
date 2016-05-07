@@ -9,15 +9,12 @@
       </div>
       <div class="image">
         <a href="#">
-          <%= image_tag photo.image_original.url, class: 'ui medium bordered image ' %>
+          <%= image_tag photo.image_original.url, size: "350x300",class: 'ui medium bordered image ' %>
         </a>
       </div>
       <div class="content">
-        <div class="left floated pup" data-content="Tamaño de la imagen">
-          <%= photo.image_original_file_size/1000 %> kb
-        </div>
         <div class="right floated pup" data-content="Resolución de la imagen">
-          <%= photo.original_size %>
+          <%= photo.has_likes %>
         </div>
       </div>
       <div class="extra content pup" data-content="Identificador único de la imagen">

@@ -42,17 +42,17 @@
                     <% when 0 %>
                         <%= image_tag 'gallery.jpg' %>
                     <% when 1 %>
-                        <%= image_tag photos.first.image(:thumb) %>
+                        <%= image_tag photos.first.image_processed(:thumb) %>
                     <% when 2 %>
                         <div id="photos">
                           <% 2.times do |pos| %>
-                              <%= image_tag photos[pos].image(:thumb) %>
+                              <%= image_tag photos[pos].image_processed(:thumb) %>
                           <% end %>
                         </div>
                     <% when 3..event.total_photos %>
                         <div id="photos">
                           <% event.total_photos.times do |pos| %>
-                              <%= image_tag photos[pos].image(:thumb) %>
+                              <%= image_tag photos[pos].image_processed(:thumb) %>
                           <% end %>
                         </div>
                     <% end %>

@@ -78,9 +78,7 @@
                             <%= render 'country_list' %>
                         <% end %>
                     <% else %>
-                        <div class="ui dropdown disabled">
-                          <option><i class="<%= @user.country %> flag"></i></option>
-                        </div>
+                        <i class="<%= @user.country %> flag"></i>
                     <% end %>
 
                   </div>
