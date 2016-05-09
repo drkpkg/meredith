@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only:[:edit_event, :info_event]
+  before_action :set_event, only:[:edit_event, :info_event, :update_event]
   before_action :exist_user, only:[:index, :new_event, :event_info]
 
   def new_event
@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def update_event
+
   end
 
   def create_event

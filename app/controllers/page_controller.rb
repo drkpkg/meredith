@@ -1,5 +1,5 @@
 class PageController < ApplicationController
-  #before_filter :verify_session
+  before_filter :verify_user
 
   layout 'welcome'
   def index

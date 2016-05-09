@@ -10,35 +10,39 @@
 </head>
 <body>
 <div class="ui menu">
-    <%= image_tag 'logo', size: '120x45', class: 'header item' %>
-    <div class="right menu">
-        <!-- notification menu -->
-        <div class="ui dropdown item">
-            <i class="grey attention icon"></i>
-            <div class="menu transition hidden" tabindex="-1">
-                <a href="#" class="item">some</a>
-            </div>
-        </div>
-        <!-- notification menu -->
+  <%= image_tag 'logo', size: '120x45', class: 'header item' %>
+  <div class="right menu">
+    <!-- notification menu -->
+    <div class="ui dropdown item">
+      <div class="centered"><i class="medium attention icon pup" data-content="Notificaciones"></i></div>
 
-        <div class="ui dropdown item" tabindex="0">
-            Menu
-            <i class="dropdown icon"></i>
-            <div class="menu transition hidden" tabindex="-1">
-                <%= link_to me_path(@user || params[:id]), class: 'item' do %>
-                    <i class="user icon"></i> Yop
-                <% end%>
-                <%= link_to me_edit_path(@user || params[:id]), class: 'item' do %>
-                    <i class="cogs icon"></i> configuración
-                <% end%>
-                <div class="divider"></div>
-                <%= link_to  logout_path, class: 'item ' do %>
-                    <i class="sign out icon"></i> Salir
-                <% end%>
-            </div>
+      <div class="menu transition hidden" tabindex="-1">
+        <div id="feed">
+          <div class="item">Sin notificaciones</div>
         </div>
+      </div>
     </div>
+    <!-- notification menu -->
+
+    <div class="ui dropdown item" tabindex="0">
+      Menu
+      <i class="dropdown icon"></i>
+      <div class="menu transition hidden" tabindex="-1">
+        <%= link_to me_path(@user || params[:id]), class: 'item' do %>
+            <i class="user icon"></i> Yop
+        <% end%>
+        <%= link_to me_edit_path(@user || params[:id]), class: 'item' do %>
+            <i class="cogs icon"></i> configuración
+        <% end%>
+        <div class="divider"></div>
+        <%= link_to  logout_path, class: 'item ' do %>
+            <i class="sign out icon"></i> Salir
+        <% end%>
+      </div>
+    </div>
+  </div>
 </div>
+
 <%= yield %>
 
 </body>

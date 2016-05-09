@@ -17,10 +17,6 @@
  *= require_self
  */
 
-.test{
-    height: 500px;
-}
-
 .front-image{
     z-index: -1;
     width: 100%;

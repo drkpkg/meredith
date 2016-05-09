@@ -35,6 +35,8 @@ class User
   field :sex, type: String, default: ''
   field :lastname, type: String, default: ''
   field :phones, type: Array, default: []
+  field :studio_name, type: String
+  field :studio_workers, type: Array, default: []
   field :social_networks, type: Hash, default: {'Facebook':'','Twitter':'','Instagram':'', 'Pinterest':'', 'Tumblr':''}
   field :is_profile_complete, type: Boolean, default: false
   

@@ -18,9 +18,20 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_user
-    if session[:current_user_id].nil? and !cookies.signed[:idbmeredith].nil?
-      session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
-    else
+    begin
+      user = User.find_by(id: cookies.signed[:idbmeredith]['$oid'])
+      if user.nil?
+        session[:current_user_id] = nil
+        cookies.delete(:idbmeredith)
+      else
+        if session[:current_user_id].nil? and !cookies.signed[:idbmeredith].nil?
+          session[:current_user_id] = cookies.signed[:idbmeredith]['$oid']
+        else
+          session[:current_user_id] = nil
+        end
+      end
+    rescue
+      cookies.delete(:idbmeredith)
       session[:current_user_id] = nil
     end
   end

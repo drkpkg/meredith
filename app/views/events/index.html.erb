@@ -21,7 +21,7 @@
                 <div class="ui card">
                   <div class="content">
                     <div class="right floated">
-                      <%= link_to event_delete_path(event.id), class:"pup", data:{content:"Eliminar galería"}, method: :delete do %>
+                      <%= link_to event_delete_path(event.id), class:"pup", data:{content:"Eliminar galería"}, method: :delete, data:{confirm: "Recuerda que las fotografías dentro del evento se borrarán, ¿Continuar?"} do %>
                           <i class="delete icon"></i>
                       <% end %>
                     </div>

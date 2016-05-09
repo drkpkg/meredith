@@ -25,7 +25,7 @@
     <% else %>
         <div class="ui dropdown item" tabindex="0">
           <% user = User.find_by(id: cookies.signed[:idbmeredith]['$oid']) %>
-          <%= image_tag user.avatar(:thumb),class:'ui avatar image'%>
+          <%= image_tag user.avatar.url(:thumb),class:'ui avatar image'%>
           <%= user.email %>
           <i class="dropdown icon"></i>
           <div class="menu transition hidden" tabindex="-1">
@@ -55,7 +55,7 @@
           <h4 class="ui inverted header">Hipstagram - 2016</h4>
           <%= image_tag 'mein_logo', class: "ui centered mini image" %>
           <a href="https://github.com/drkpkg" target="_blank">Github de Drkpkg</a>
-          <p>Hecho con amor y mucho ruby</p>
+          <p>Hecho con amor y mucho café</p>
         </div>
         <div class="four wide column"></div>        
       </div>

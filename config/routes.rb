@@ -28,10 +28,16 @@ Rails.application.routes.draw do
 
   #API for mobile
   scope 'resources' do
-    scope 'bearone' do
-      post '_auth_user' => 'api#_auth_user'
-      post '_create_user' => 'api#_create_user'
-      get '_info_user' => 'api#_info_user'
+    scope 'spark' do
+      scope 'user' do
+        post 'auth_user' => 'api#auth_user'
+        post 'create_user' => 'api#create_user'
+        get 'info_user/:id' => 'api#info_user'
+      end
+      scope 'event' do
+        get 'info_event/:id' => 'api#info_event'
+      end
+
     end
   end
 

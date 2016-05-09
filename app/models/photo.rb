@@ -7,8 +7,8 @@ class Photo
   field :description, type: String
   field :likes, type: Array, default: []
   has_mongoid_attached_file :image_original,
-                            :url => "/files/:class/:event_id/:attachment/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/files/:class/:event_id/:attachment/:id/:style/:basename.:extension"
+                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
+                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
 
   has_mongoid_attached_file :image_processed,
                             processors: [:watermark],
