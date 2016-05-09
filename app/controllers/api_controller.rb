@@ -1,9 +1,15 @@
 class ApiController < ApplicationController
+  before_filter :check_format
+  before_action :set_user, only: [:auth_user, :info_user]
+  respond_to :json
 
-  before_action :set_user, only: [:_auth_user, :_info_user]
 
   def auth_user
-
+    if @user.nil?
+      respond_with nil, status: 400
+    else
+      respond_with true
+    end
   end
 
   def create_user
@@ -11,44 +17,36 @@ class ApiController < ApplicationController
   end
 
   def info_user
-    respond_to do |format|
-      if user.nil?
-        format.html {render text: "Hey, staph", status: 400}
-        format.json {render json: {data: ["Hey, staph", status: 400]}}
-      else
-        format.html {render json: user.to_json}
-        format.json {render user.to_json}
-      end
+    if @user.nil?
+      respond_with nil, status: 400
+    else
+      respond_with data:{name: @user.complete_name, sex: @user.sex_humanize, email: @user.email, followers: @user.has_follow_users}
     end
+
   end
 
   def info_event
     event = Event.find_by(event_code: params[:id])
-    respond_to do |format|
-      if event.nil?
-        format.html {render text: "Hey, staph", status: 400}
-        format.json {render json: {data: ["Hey, staph", status: 400]}}
-      else
-        photo_gallery = Array.new
-        Photo.where(event_id: event.id).each do |photo|
-          photo_gallery.push({id: photo.image_original_fingerprint,
-                              original: photo.image_processed.url(:original),
-                              medium: photo.image_processed.url(:medium),
-                              small: photo.image_processed.url(:small),
-                              thumb: photo.image_processed.url(:thumb)})
-        end
-        format.html {render json: photo_gallery.as_json }
-        format.json {render photo_gallery.as_json}
+    if event.nil?
+      respond_with nil, status: 400
+    else
+      gallery = Photo.where(event_id: event.id)
+      photo_gallery = Array.new
+      gallery.each do |photo|
+        photo_gallery.push({id: photo.image_original_fingerprint,
+                            original: photo.image_processed.url(:original),
+                            medium: photo.image_processed.url(:medium),
+                            small: photo.image_processed.url(:small),
+                            thumb: photo.image_processed.url(:thumb)})
       end
+      respond_with data:photo_gallery
     end
   end
-
-
 
   private
 
   def set_user
-    user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
 end

@@ -13,6 +13,9 @@ Bundler.require(*Rails.groups)
 
 module Meredith
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end
