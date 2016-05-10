@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
 
-  before_action :set_photo_gallery, only: [:index, :create, :delete]
+  before_action :verify_user
+  before_action :set_photo_gallery, only: [:index, :create, :delete, :get_photo]
 
   def index
   end
@@ -22,6 +23,10 @@ class PhotosController < ApplicationController
     @event_id = params[:event_id]
     photo = Photo.find_by(id: params[:image_id])
     photo.destroy
+  end
+
+  def get_photo
+    @photo_actual = Photo.find_by(id: params[:id])
   end
 
   private

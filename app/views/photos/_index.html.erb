@@ -8,9 +8,9 @@
         </div>
       </div>
       <div class="image">
-        <a href="#">
-          <%= image_tag photo.image_original.url, size: "350x300",class: 'ui medium bordered image ' %>
-        </a>
+        <%= link_to photo_url_path(photo.id), remote: true do %>
+            <%= image_tag photo.image_original.url, size: "350x300",class: 'ui medium bordered image ' %>
+        <% end %>
       </div>
       <div class="content">
         <div class="right floated pup" data-content="Tienes <%= photo.has_likes %> likes">

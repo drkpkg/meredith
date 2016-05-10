@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :exist_user, only: [:dashboard, :profile, :edit_profile]
   before_action :verify_user, only: [:new_profile]
   before_action :set_user, only: [:edit_profile, :profile, :dashboard, :update_profile, :destroy_profile]
+
   layout 'welcome', only: [:new_profile]
   
   def dashboard

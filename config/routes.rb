@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'me/:id/events/:event_id' => 'events#info_event', as: :event_info
   get 'me/:id/events/:event_id/edit' => 'events#edit_event', as: :event_edit
   get '/photos' => 'photos#index'
+  get '/photos/storage/:id' => 'photos#get_photo', as: :photo_url
   post 'login/auth'=> 'sessions#authorize_user'
   post 'users/create_profile' => 'users#create_profile'
   post 'event/create_event' => 'events#create_event', as: :event_create
@@ -24,7 +25,9 @@ Rails.application.routes.draw do
   delete 'event/:event_id/delete_event' => 'events#delete_event', as: :event_delete
   delete 'users/destroy_profile' => 'users#destroy_profile'
   delete 'me/:id/events/:event_id/:image_id/delete_photo' => 'photos#delete', as: :photo_delete
+
   match '404' => 'page#not_found', via: [:get]
+
 
   #API for mobile
   scope 'resources' do

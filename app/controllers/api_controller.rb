@@ -13,7 +13,12 @@ class ApiController < ApplicationController
   end
 
   def create_user
-
+    user = User.new(api_user_params)
+    if user.save
+      respond_with data:{message: "Bienvenido", status: 200}
+    else
+      respond_with data:{message: user.errors, status: 400}
+    end
   end
 
   def info_user
@@ -22,7 +27,6 @@ class ApiController < ApplicationController
     else
       respond_with data:{name: @user.complete_name, sex: @user.sex_humanize, email: @user.email, followers: @user.has_follow_users}
     end
-
   end
 
   def info_event
@@ -47,6 +51,10 @@ class ApiController < ApplicationController
 
   def set_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def api_user_params
+    params.require(:user).permit(:email, :name, :lastname, :sex)
   end
 
 end

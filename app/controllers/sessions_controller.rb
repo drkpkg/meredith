@@ -10,21 +10,26 @@ class SessionsController < ApplicationController
     end
 
     def authorize_user
-        if params[:session][:email].blank? and params[:session][:password].blank? 
+        if params[:session][:email].blank? and params[:session][:password].blank?
             redirect_to login_path, notice: "Campos en blanco"
         else
             @user = User.find_by(email: params[:session][:email])
-            if @user.password == params[:session][:password]
-                session[:current_user_id] = @user.id
-                if params[:session][:persistent_login]=='1'
-                    cookies.permanent.signed[:idbmeredith] = @user.id
-                else
-                    cookies.signed[:idbmeredith] = @user.id
-                end
-                redirect_to me_path(@user)
+            if @user.user_type == 'client'
+                redirect_to login_path, notice: 'Usuario no autorizado, los clientes necesitan usar la app movil'
             else
-                redirect_to login_path, notice: "Por favor verifica tus datos"
+                if @user.password == params[:session][:password]
+                    session[:current_user_id] = @user.id
+                    if params[:session][:persistent_login]=='1'
+                        cookies.permanent.signed[:idbmeredith] = @user.id
+                    else
+                        cookies.signed[:idbmeredith] = @user.id
+                    end
+                    redirect_to me_path(@user)
+                else
+                    redirect_to login_path, notice: "Por favor verifica tus datos"
+                end
             end
+
         end
     end
 
@@ -32,6 +37,13 @@ class SessionsController < ApplicationController
         @_current_user = session[:current_user_id] = nil
         cookies.delete :idbmeredith
         redirect_to root_url
+    end
+
+    private
+    def verify_type
+        if @user.user_type == 'client'
+            redirect_to root_path
+        end
     end
 
 end

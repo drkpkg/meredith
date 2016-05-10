@@ -43,6 +43,8 @@ $(document).on('ready page:load', function() {
         on: 'hover'
     });
 
+    $('.ui.modal').modal();
+
     $('.pup').popup();
 
     $('.add').unbind('click').click(function() {
