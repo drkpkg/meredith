@@ -13,6 +13,7 @@
     </div>
     <div class="one wide column"></div>
     <div class="twelve wide column">
+      <div id="message-box"></div>
       <% if flash[:success] %>
           <div class="ui success message transition">
             <i class="close icon"></i>
@@ -21,22 +22,22 @@
           </div>
       <% end %>
       <% if @event.total_photos == 0 %>
-        <div id="initial-message" class="ui two top attached steps">
-          <div class="completed step">
-            <i class="info circle icon"></i>
-            <div class="content">
-              <div class="title">Heyo!</div>
-              <div class="description">Esta galería esta lista</div>
+          <div id="initial-message" class="ui two top attached steps">
+            <div class="completed step">
+              <i class="info circle icon"></i>
+              <div class="content">
+                <div class="title">Heyo!</div>
+                <div class="description">Esta galería esta lista</div>
+              </div>
             </div>
-          </div>
             <div class="active step">
               <i class="camera retro icon"></i>
-            <div class="content">
+              <div class="content">
                 <div class="title"></div>
                 <div class="description">Agrega fotografías a tu galería</div>
+              </div>
             </div>
           </div>
-        </div>
       <% end %>
       <div class="ui fluid card">
         <div class="content">

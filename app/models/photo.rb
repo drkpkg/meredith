@@ -33,6 +33,8 @@ class Photo
                                     content_type: /\Aimage/,
                                     message: "El archivo no es una imagen"
 
+  validates_uniqueness_of :image_original_fingerprint, message: "La imagen ya la subieron :v"
+
   belongs_to :event
 
   before_destroy :delete_photo_data

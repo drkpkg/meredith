@@ -23,6 +23,7 @@ $(document).on('ready page:load', function() {
     $('.message .transition').on('click', function() {
         $(this).closest('.message').transition('fade');
     });
+
     $('.message.transition').on('click', function() {
         return $(this).closest('.message').transition('fade');
     });

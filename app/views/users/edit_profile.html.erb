@@ -52,23 +52,21 @@
               <div class="eleven wide column">
                 <div class="four fields">
                   <div class="field">
-                    <label>Nombre</label>
-                    <%= form.text_field :name, placeholder: 'Nombre' if @user.name.blank?%>
-                    <%= form.text_field :name, placeholder: 'Nombre', disabled: "" if !@user.name.blank?%>
+                    <label>Nombre completo</label>
+                    <%= form.label "", placeholder: 'Nombre' if @user.name.blank?%>
+                    <%= form.label @user.complete_name, placeholder: 'Nombre', disabled: "" if !@user.name.blank?%>
                   </div>
-                  <div class="field">
+                  <!--div class="field">
                     <label>Apellidos</label>
                     <%= form.text_field :lastname, placeholder: 'Apellidos' if @user.lastname.blank? %>
                     <%= form.text_field :lastname, placeholder: 'Apellidos', disabled: "" if !@user.lastname.blank? %>
-                  </div>
+                  </div-->
                   <div class="field">
                     <label>Sexo</label>
                     <% if @user.sex.blank? %>
                         <%= form.select :sex, [['Selecione una opción', ""], ['Hombre','h'],['Mujer','m']], {disabled: 'Selecione una opción'}, {class: 'ui dropdown'} if @user.sex.blank?%>
                     <% else %>
-                        <select class="ui dropdown disabled">
-                          <option><%= form.label @user.sex_humanize  %></option>
-                        </select>
+                        <%= form.label @user.sex_humanize  %>
                     <% end %>
                   </div>
                   <div class="field">
@@ -80,7 +78,6 @@
                     <% else %>
                         <i class="<%= @user.country %> flag"></i>
                     <% end %>
-
                   </div>
                 </div>
                 <div class="two fields">
