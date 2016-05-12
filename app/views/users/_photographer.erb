@@ -1,0 +1,76 @@
+<% if @user.is_profile_complete == false %>
+    <%= render 'general/info_message', locals:{notice: "Recuerda que tienes que completar tus datos de usuario", link: "#{me_edit_path(@user)}"} %>
+<% end %>
+<div class="ui grid">
+  <div class="eight wide column">
+    <div class="ui fluid card">
+      <div class="blurring dimmable image profile">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+              <%= link_to event_path(@user), class: 'ui button' do %>
+                  <i class="big list icon"></i> Mis galerías
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <%= image_tag 'event.jpg' %>
+      </div>
+    </div>
+  </div>
+  <div class="eight wide column">
+    <div class="ui fluid card">
+      <div class="blurring dimmable image profile">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+              <%= link_to event_new_path(@user), class: 'ui button' do %>
+                  <i class="big icons">
+                    <i class="photo icon"></i>
+                    <i class="corner add icon"></i>
+                  </i>
+                  Registrar nueva galería
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <%= image_tag 'new_event.jpg' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid card">
+  <div class="content">
+    <div class="header"><i class="big pie chart icon"></i>Información nutricional</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+      <div class="row">
+        <div class="sixteen wide column">
+          <%= render 'information' %>
+        </div>
+      </div>
+    </div>
+    <div class="ui grid">
+      <div class="row">
+        <div class="sixteen wide column">
+          <div class="orange ui fluid card">
+            <div class="header">Promedio de fotografías por galería</div>
+            <div class="content">
+              <i class="massive icons">
+                <i class="camera retro icon"></i>
+                <i class="corner inverted icon"><%= @user.total_of_medium_images_per_gallery %></i>
+              </i>
+              <h1>
+                <label class="pup" data-content="Recuerda que esta medición es aproximada entre todas tus galerías de fotografías">
+                  Imágenes por galería
+                </label>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

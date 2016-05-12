@@ -1,0 +1,27 @@
+<%= form_for @user, url: users_create_profile_path, remote: true, html:{ class: 'ui form' } do |form| %>
+    <div class="field">
+      <label>Primero dinos, ¿Qué deseas hacer en la app?</label>
+      <%= form.select :user_type, [['Selecione una opción', ""], ['Soy Fotógrafo y quiero promocionar mi trabajo','photographer'],['Estoy interesado comprar fotografías','client']], {disabled: "Selecione una opción"}, {class: 'ui dropdown'} %>
+    </div>
+    <div class="field">
+      <label>Correo electrónico</label>
+      <%= form.text_field :email, placeholder: 'Correo electrónico' %>
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <%= form.password_field :password, placeholder: 'Contraseña' %>
+    </div>
+    <div class="field">
+      <label>Confirmar contraseña</label>
+      <%= form.password_field :password_confirmation, placeholder: 'Confirmar contraseña' %>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <%= form.check_box :terms, tabindex: 0, class:'hidden' %>
+        <label for="user_terms" >Acepto los términos y condiciones</label>
+      </div>
+    </div>
+    <div class="field">
+      <%= form.submit 'Registrarme', class: 'green ui button' %>
+    </div>
+<% end %>

@@ -6,9 +6,11 @@ class Photo
   field :event_id, type: String
   field :description, type: String
   field :likes, type: Array, default: []
-  has_mongoid_attached_file :image_original,
-                            :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
+  field :image_original, type: String
+
+  # has_mongoid_attached_file :image_original,
+  #                           :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
+  #                           :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
 
   has_mongoid_attached_file :image_processed,
                             processors: [:watermark],
@@ -21,19 +23,19 @@ class Photo
                             :url => "/files/:class/:attachment/:id/:style/:basename.:extension",
                             :path => ":rails_root/public/files/:class/:attachment/:id/:style/:basename.:extension"
 
-  validates_attachment_size :image_original,
+  validates_attachment_size :image_processed,
                             :in => 0.megabytes..500.megabytes,
                             message: "El tamaño del archivo es muy grande"
 
-  validates_attachment_file_name :image_original,
+  validates_attachment_file_name :image_processed,
                                  matches: [/png\Z/, /jpe?g\Z/],
                                  message: "Formato no admitido"
 
-  validates_attachment_content_type :image_original,
+  validates_attachment_content_type :image_processed,
                                     content_type: /\Aimage/,
                                     message: "El archivo no es una imagen"
 
-  validates_uniqueness_of :image_original_fingerprint, message: "La imagen ya la subieron :v"
+  # validates_uniqueness_of :image_original_fingerprint, message: "La imagen ya la subieron :v"
 
   belongs_to :event
 

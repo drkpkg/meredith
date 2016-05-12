@@ -3,11 +3,11 @@
 <div class="ui equal width aligned padded grid">
   <div class="row">
     <div class="two wide column">
-        <div class="ui small vertical menu">
-            <%= link_to me_path(params[:id]), class:"item" do %>
-                <i class="dashboard icon"></i> Dashboard
-            <% end %>
-         </div>
+      <div class="ui small vertical menu">
+        <%= link_to me_path(params[:id]), class:"item" do %>
+            <i class="dashboard icon"></i> Dashboard
+        <% end %>
+      </div>
     </div>
 
     <div class="twelve wide column">
@@ -28,7 +28,7 @@
           <% end %>
           <h4 class="ui dividing header">Editar mi información</h4>
           <% if @user.is_profile_complete == false %>
-            <%= render 'general/info_message', locals: { notice: "Recuerda que una vez ingresada, solo podrás cambiar información básica de tu perfil!!!" }  %>
+              <%= render 'general/info_message', locals: { notice: "Recuerda que una vez ingresada, solo podrás cambiar información básica de tu perfil!!!" }  %>
           <% end %>
           <div class="ui grid">
             <div class="row">
@@ -52,15 +52,20 @@
               <div class="eleven wide column">
                 <div class="four fields">
                   <div class="field">
-                    <label>Nombre completo</label>
-                    <%= form.label "", placeholder: 'Nombre' if @user.name.blank?%>
-                    <%= form.label @user.complete_name, placeholder: 'Nombre', disabled: "" if !@user.name.blank?%>
+                    <% if @user.name.blank? %>
+                        <label>Nombre</label>
+                        <%= form.text_field :name, placeholder: 'Nombre' %>
+                    <% else %>
+                        <label>Nombre completo</label>
+                        <%= form.label @user.complete_name, placeholder: 'Nombre'%>
+                    <% end %>
                   </div>
-                  <!--div class="field">
-                    <label>Apellidos</label>
-                    <%= form.text_field :lastname, placeholder: 'Apellidos' if @user.lastname.blank? %>
-                    <%= form.text_field :lastname, placeholder: 'Apellidos', disabled: "" if !@user.lastname.blank? %>
-                  </div-->
+                  <div class="field">
+                    <% if @user.lastname.blank? %>
+                        <label>Apellidos</label>
+                        <%= form.text_field :lastname, placeholder: 'Apellidos' %>
+                    <% end %>
+                  </div>
                   <div class="field">
                     <label>Sexo</label>
                     <% if @user.sex.blank? %>
@@ -119,7 +124,6 @@
                     <a href="#" class="add">agregar número</a>
                   </div>
                 </div>
-
                 <%= form.submit 'Actualizar mi información', class: 'green ui button' %>
                 <%= link_to "Volver al dashboard", me_path(@user), class: "red ui button" %>
               </div>

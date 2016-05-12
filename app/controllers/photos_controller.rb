@@ -1,3 +1,5 @@
+require 'base64'
+
 class PhotosController < ApplicationController
 
   before_action :verify_user
@@ -10,7 +12,7 @@ class PhotosController < ApplicationController
     params[:photo][:image].each do |new_photo|
       @photo = Photo.new
       @photo.event_id = params[:event_id]
-      @photo.image_original = new_photo      
+      @photo.image_original = Base64.encode64(open(new_photo.path).to_a.join)
       @photo.image_processed = new_photo
       @photo.save
     end

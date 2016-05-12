@@ -9,7 +9,7 @@
       </div>
       <div class="image">
         <%= link_to photo_url_path(photo.id), remote: true do %>
-            <%= image_tag photo.image_original.url, size: "350x300",class: 'ui medium bordered image ' %>
+            <%= image_tag photo.image_processed.url, size: "350x300",class: 'ui medium bordered image ' %>
         <% end %>
       </div>
       <div class="content">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="extra content pup" data-content="Identificador único de la imagen">
-        <%= photo.image_original_fingerprint %>
+        <%= photo.image_processed_fingerprint %>
       </div>
     </div>
 <% end %>
