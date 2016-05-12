@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="eleven wide column">
-                <div class="four fields">
+                <div class="three fields">
                   <div class="field">
                     <% if @user.name.blank? %>
                         <label>Nombre</label>
@@ -73,6 +73,12 @@
                     <% else %>
                         <%= form.label @user.sex_humanize  %>
                     <% end %>
+                  </div>                  
+                </div>
+                <div class="three fields">
+                  <div class="field">
+                    <label>Alias</label>
+                    <%= form.text_field :alias, placeholder: 'Alias' %>
                   </div>
                   <div class="field">
                     <label>País</label>
@@ -83,12 +89,6 @@
                     <% else %>
                         <i class="<%= @user.country %> flag"></i>
                     <% end %>
-                  </div>
-                </div>
-                <div class="two fields">
-                  <div class="field">
-                    <label>Alias</label>
-                    <%= form.text_field :alias, placeholder: 'Alias' %>
                   </div>
                   <div class="field">
                     <label>Dirección</label>
