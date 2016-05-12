@@ -43,7 +43,7 @@ class Photo
 
   def has_likes
     return 0 if self.likes.empty?
-    return self.likes.lenght
+    return self.likes.length
   end
   
   def original_resolution
