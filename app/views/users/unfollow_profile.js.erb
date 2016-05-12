@@ -1,0 +1,2 @@
+$("#follow").empty().append('<%= link_to follow_user_path(@actual_profile.id), remote: true, method: :patch do %> <i class="blue heart icon"></i><% end %>');
+$("#follow-people").empty().append('<span class="left floated"><%= @actual_profile.has_follow_users %> personas lo siguen</span>');

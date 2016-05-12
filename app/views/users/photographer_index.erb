@@ -1,0 +1,59 @@
+<% title 'Modificar mi perfil' %>
+
+<div class="ui equal width aligned padded grid">
+  <div class="row">
+    <div class="two wide column">
+      <div class="ui small vertical menu">
+        <%= link_to me_path(params[:id] || @user), class:"item" do %>
+            <i class="dashboard icon"></i> Dashboard
+        <% end %>
+      </div>
+    </div>
+    <div class="twelve wide column">
+      <div class="ui link cards">
+        <% @photographers.each do |photographer| %>
+            <div class="card">
+              <div class="image">
+                <%= image_tag photographer.avatar.url%>
+              </div>
+              <div class="content">
+                <div class="header">
+                  <%= link_to photographer_gallery_path(photographer.id) do %>
+                      <%= photographer.complete_name %>
+                  <% end %>
+                </div>
+                <div class="meta"><a><%= photographer.total_of_galleries %> galería(s)</a></div>
+                <div class="meta"><a><%= photographer.total_of_photos %> fotografía(s)</a></div>
+                <div class="description">
+                  <% photographer.social_networks_list.each do |key, value| %>
+                      <% if !value.blank? %>
+                        <a href="<%= value %>" class="ui teal right icon button pup" data-content="Cuenta de <%= key %>" target="_blank"><i class="tiny <%= key.to_s.downcase %> icon"></i></a>
+                      <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="extra content">
+                <span class="right floated">
+                  <div id="follow">
+                    <% if photographer.follow_users.include?(@user.id) %>
+                        <%= link_to unfollow_user_path(photographer.id), remote: true, method: :patch do %>
+                            <i class="red heart icon"></i>
+                        <% end %>
+                    <% else %>
+                        <%= link_to follow_user_path(photographer.id), remote: true, method: :patch do %>
+                            <i class="blue heart icon"></i>
+                        <% end %>
+                    <% end %>
+                  </div>
+                  <label id="follow-msg">Seguir</label>
+                </span>
+                <div id="follow-people">
+                  <span class="left floated"><%= photographer.has_follow_users %> personas lo siguen</span>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

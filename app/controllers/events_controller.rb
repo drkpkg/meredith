@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only:[:edit_event, :info_event, :update_event]
   before_action :exist_user, only:[:index, :new_event, :event_info]
+  before_action :has_permissions
 
   def new_event
     @event = Event.new

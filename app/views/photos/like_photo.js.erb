@@ -1,0 +1,1 @@
+$("#likes").empty().append('<%= link_to like_photo_path(@actual_photo.id), remote: true, method: :patch do %><i class="red like icon"></i> <% end %>');

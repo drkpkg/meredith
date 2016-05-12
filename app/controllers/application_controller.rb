@@ -45,4 +45,11 @@ class ApplicationController < ActionController::Base
       session[:current_user_id] = nil
     end
   end
+
+  def has_permissions
+    user = User.find_by(id: cookies.signed[:idbmeredith]['$oid'])
+    if user.user_type != 'photographer'
+      redirect_to me_path(user.id)
+    end
+  end
 end

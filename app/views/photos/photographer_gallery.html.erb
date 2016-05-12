@@ -1,0 +1,61 @@
+<% title "Galerías" %>
+
+<div class="ui grid">
+  <div class="row">
+    <div class="two wide column">
+      <div class="ui small vertical menu">
+        <%= link_to me_path(@user), class:"item" do %>
+            <i class="dashboard icon"></i> Dashboard
+        <% end %>
+      </div>
+    </div>
+    <div class="one wide column"></div>
+    <div class="twelve wide column">
+
+      <div class="ui cards">
+        <% @events.each do |event| %>
+            <div class="ui card">
+              <div class="blurring dimmable image profile">
+                <div class="ui dimmer">
+                  <div class="content">
+                    <div class="center">
+                      <div class="ui buttons">
+                        <%= link_to event.event_name, photographer_gallery_photo_path(event.user.id, event.id), class:"blue ui button" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% photos = Photo.where(event_id: event.id) %>
+
+                <% case event.total_photos %>
+                <% when 0 %>
+                    <%= image_tag 'gallery.jpg' %>
+                <% when 1 %>
+                    <%= image_tag photos.first.image_processed(:thumb) %>
+                <% when 2 %>
+                    <div id="photos">
+                      <% 2.times do |pos| %>
+                          <%= image_tag photos[pos].image_processed(:thumb) %>
+                      <% end %>
+                    </div>
+                <% when 3..event.total_photos %>
+                    <div id="photos">
+                      <% event.total_photos.times do |pos| %>
+                          <%= image_tag photos[pos].image_processed(:thumb) %>
+                      <% end %>
+                    </div>
+                <% end %>
+              </div>
+              <div class="extra content">
+                <div class="left floated">
+                  <i class="photo icon"></i><%= event.total_photos %> fotografías
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="one wide column"></div>
+  </div>
+</div>
