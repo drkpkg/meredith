@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -27,6 +27,6 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'photoswipe-rails'
 gem "jquery-fileupload-rails"
 gem 'aws-sdk', '~> 1.3.4'
-gem 'paperclip-watermark', :git  => 'git://github.com/drkpkg/paperclip-watermark.git'
-gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
+gem 'paperclip-watermark', :git  => 'https://github.com/drkpkg/paperclip-watermark.git'
+gem 'mini_magick', :git => 'https://github.com/probablycorey/mini_magick.git'
 gem 'rack-cache', :require => 'rack/cache'

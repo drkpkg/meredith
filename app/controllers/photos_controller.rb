@@ -47,7 +47,6 @@ class PhotosController < ApplicationController
 
   def unlike_photo
     @actual_photo.likes.delete(cookies.signed[:idbmeredith]['$oid'])
-    @actual_photos.likes = @actual_photo.likes.uniq
     @actual_photos.save
   end
 
