@@ -1,4 +1,4 @@
-== README
+== LEEME
 
 Hipstagram
 
@@ -46,6 +46,7 @@ Este proyecto está hecho a base de café y amor con Ruby on Rails.
     - En construcción con puma o passenger.
 
 
+==LICENCIA MIT
 
 Copyright (c) 2016 Drkpkg
 
