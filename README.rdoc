@@ -13,37 +13,37 @@ Este proyecto está hecho a base de café y amor con Ruby on Rails.
 
 * Versión del proyecto
 
-- 0.2
+    - 0.2
 
 * Versión de Ruby
 
-- Ruby 2.3.0p0
+    - Ruby 2.3.0p0
 
 * Versión de Rails
 
-- Rails 4.2.5.2
+    - Rails 4.2.5.2
 
 * Dependencias
 
-- Imagemagick para procesamiento de imágenes
-- MongoDb como gestor de base de datos.
+    - Imagemagick para procesamiento de imágenes
+    - MongoDb como gestor de base de datos.
 
 * Configuración
 
-- Bundle install
-- rails s
+    - Bundle install
+    - rails s
 
 * Base de datos
 
-- Usa mongoDB como tal, en desarrollo la aplicación no será necesaria
+    - Usa mongoDB como tal, en desarrollo la aplicación no será necesaria
 
 * Testing *Aún en proceso*
 
-- Usa Rspec como suite de testing
+    - Usa Rspec como suite de testing
 
 * Instrucciones de despliegue
 
-- En construcción con puma o passenger.
+    - En construcción con puma o passenger.
 
 
 
