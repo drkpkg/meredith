@@ -26,6 +26,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "should edit profile" do
+    get :update_profile, id: @user.id
+    assert_response :redirect
+  end
+
   test "should create profile" do
     email = 'user@mail.com'
     terms = true
@@ -37,12 +42,12 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update profile" do
-    get :update_profile, id: @user.id
+    patch :update_profile, id: @user.id, user:{name:"Cosme", lastname:"Fulanito", alias:"Cosmetin", avatar:"", phones_list:[12345678, 3402212], social_networks_list:{}, sex:"h", address:"Address", country:"BO" }
     assert_response :redirect
   end
 
   test "should destroy profile" do
-    post :destroy_profile, id: @user.id
+    delete :destroy_profile, id: @user.id
     assert_response :redirect
   end
 
