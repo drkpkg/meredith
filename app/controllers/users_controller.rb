@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :exist_user, only: [:dashboard, :profile, :edit_profile]
   before_action :verify_user, only: [:new_profile]
   before_action :set_user, only: [:edit_profile, :profile, :dashboard, :update_profile, :destroy_profile, :photographer_index]
+  before_action :set_actual_photographer_profile, only: [:follow_profile, :unfollow_profile]
+
 
   layout 'welcome', only: [:new_profile]
   
@@ -50,28 +52,27 @@ class UsersController < ApplicationController
 
 
   def unfollow_profile
-    @actual_profile = User.find_by(id: params[:photographer_id])
     @actual_profile.follow_users.delete(current_user.id)
     @actual_profile.follow_users = @actual_profile.follow_users.uniq
     @actual_profile.save
   end
 
   def follow_profile
-    @actual_profile = User.find_by(id: params[:photographer_id])
     @actual_profile.follow_users.push(current_user.id)
     @actual_profile.follow_users = @actual_profile.follow_users.uniq
     @actual_profile.save
-  end
-
-  def suscribe_event
   end
 
   def photographer_index
     @photographers = User.where(user_type: 'photographer')
   end
 
-  private 
-  
+  private
+
+  def set_actual_photographer_profile
+    @actual_profile = User.find_by(id: params[:photographer_id])
+  end
+
   def user_params_for_new
     params.require(:user).permit(:email, :terms, :password, :password_confirmation, :user_type)
   end

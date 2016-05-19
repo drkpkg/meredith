@@ -1,54 +1,49 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+
+  def setup
+    @user = User.create(email: 'user@email.com', password: 'some_password_1234', terms: true)
+  end
+
   test "should get dashboard" do
-    get :dashboard
-    assert_response :success
+    get :dashboard, id: @user.id
+    assert_response :redirect
   end
 
   test "should get profile" do
-    get :profile
-    assert_response :success
+    get :profile, id: @user.id
+    assert_response :redirect
   end
 
-  test "should get new_profile" do
+  test "should get new profile" do
     get :new_profile
     assert_response :success
   end
 
-  test "should get edit_profile" do
-    get :edit_profile
+  test "should get profile info" do
+    get :profile, id: @user.id
+    assert_response :redirect
+  end
+
+  test "should create profile" do
+    email = 'user@mail.com'
+    terms = true
+    user_type = 'photographer'
+    password = 'some_password_1234'
+    password_confirmation = 'some_password_1234'
+    post :create_profile, user:{email: email, terms: terms, user_type: user_type, password: password, password_confirmation: password_confirmation}, format: 'js'
     assert_response :success
   end
 
-  test "should get create_profile" do
-    get :create_profile
-    assert_response :success
+  test "should update profile" do
+    get :update_profile, id: @user.id
+    assert_response :redirect
   end
 
-  test "should get update_profile" do
-    get :update_profile
-    assert_response :success
-  end
-
-  test "should get destroy_profile" do
-    get :destroy_profile
-    assert_response :success
-  end
-
-  test "should get block_profile" do
-    get :block_profile
-    assert_response :success
-  end
-
-  test "should get follow_profile" do
-    get :follow_profile
-    assert_response :success
-  end
-
-  test "should get suscribe_event" do
-    get :suscribe_event
-    assert_response :success
+  test "should destroy profile" do
+    post :destroy_profile, id: @user.id
+    assert_response :redirect
   end
 
 end
