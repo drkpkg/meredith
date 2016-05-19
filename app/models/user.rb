@@ -120,7 +120,7 @@ class User
 
   def sex_humanize
     return 'Hombre' if self.sex=='h'
-    return 'Mujer' if self.sex=='f'
+    return 'Mujer' if self.sex=='m'
   end
 
   def total_of_galleries
