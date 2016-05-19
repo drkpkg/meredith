@@ -52,8 +52,8 @@ Copyright (c) 2016 Drkpkg
 
 Por la presente se autoriza, de forma gratuita, a cualquier persona que haya obtenido una copia de este software y archivos de documentación asociados (el "Software"), a utilizar el Software sin restricción, incluyendo sin limitación los derechos de usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar, y/o vender copias de este Software, y permitir lo mismo a las personas a las que se les proporcione el Software, de acuerdo con las siguientes condiciones:
 
-1.- Incluir siempre al autor original del software y contribuyentes.
-2.- Incluir el repositorio original del proyecto como enlace en la aplicación.
+    1.- Incluir siempre al autor original del software y contribuyentes.
+    2.- Incluir el repositorio original del proyecto como enlace en la aplicación.
 
 El aviso de copyright anterior y este aviso de permiso tendrán que ser incluidos en todas las copias o partes sustanciales del Software.
 
