@@ -39,7 +39,7 @@ Este proyecto está hecho a base de café y amor con Ruby on Rails.
 
 * Testing *Aún en proceso*
 
-    - Usa Rspec como suite de testing
+    - Usa Minitest como suite de testing
 
 * Instrucciones de despliegue
 
