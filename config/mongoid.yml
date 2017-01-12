@@ -140,3 +140,15 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+production:
+  sessions:
+    default:
+      uri: mongodb://drkpkg:123456@ds145868.mlab.com:45868/meredith
+      options:
+        consistency: :strong
+        max_retries: 30
+        retry_interval: 1
+        timeout: 15
+        safe: true
+        refresh_interval: 10

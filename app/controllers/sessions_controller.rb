@@ -14,15 +14,19 @@ class SessionsController < ApplicationController
             redirect_to login_path, notice: "Campos en blanco"
         else
             @user = User.find_by(email: params[:session][:email])
-            if @user.password == params[:session][:password]
-              session[:current_user_id] = @user.id
-              if params[:session][:persistent_login]=='1'
-                cookies.permanent.signed[:idbmeredith] = @user.id
+            begin
+              if @user.password == params[:session][:password]
+                session[:current_user_id] = @user.id
+                if params[:session][:persistent_login]=='1'
+                  cookies.permanent.signed[:idbmeredith] = @user.id
+                else
+                  cookies.signed[:idbmeredith] = @user.id
+                end
+                redirect_to me_path(@user)
               else
-                cookies.signed[:idbmeredith] = @user.id
+                redirect_to login_path, notice: "Por favor verifica tus datos"
               end
-              redirect_to me_path(@user)
-            else
+            rescue
               redirect_to login_path, notice: "Por favor verifica tus datos"
             end
         end
