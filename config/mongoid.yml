@@ -145,8 +145,6 @@ production:
   clients:
     default:
       uri: mongodb://drkpkg:123456@ds145868.mlab.com:45868/meredith
-      hosts:
-        - localhost:27017
       options:
         read:
           mode: :primary
