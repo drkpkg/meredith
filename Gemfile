@@ -10,7 +10,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7', :require => "bcrypt"
 gem 'responders', '~> 2.0'
-gem "codeclimate-test-reporter", group: :test, require: nil
+#gem "codeclimate-test-reporter", group: :test, require: nil
+
+group :test do 
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"  
+end
 
 group :development, :test do
   gem 'byebug'

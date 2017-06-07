@@ -1,9 +1,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require "codeclimate-test-reporter"
+require "simplecov"
 
-CodeClimate::TestReporter.start
+SimpleCov.start
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...

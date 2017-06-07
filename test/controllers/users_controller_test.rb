@@ -38,7 +38,7 @@ class UsersControllerTest < ActionController::TestCase
     password = 'some_password_1234'
     password_confirmation = 'some_password_1234'
     post :create_profile, user:{email: email, terms: terms, user_type: user_type, password: password, password_confirmation: password_confirmation}, format: 'js'
-    assert_response :success
+    assert_response :success, "Should be success"
   end
 
   test "should update profile" do
