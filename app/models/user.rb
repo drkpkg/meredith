@@ -37,7 +37,7 @@ class User
   field :phones, type: Array, default: []
   field :studio_name, type: String
   field :studio_workers, type: Array, default: []
-  field :social_networks, type: Hash#, default: {'Facebook':'','Twitter':'','Instagram':'', 'Pinterest':'', 'Tumblr':''}
+  field :social_networks, type: Hash, default: lambda {default_social_networks}
   field :is_profile_complete, type: Boolean, default: false
   
   #Relations
@@ -144,5 +144,10 @@ class User
     end
     return total/galleries.count if total_of_galleries > 0
     return total
+  end
+
+  def default_social_networks
+    # Default social networks for every user
+    {facebook: 'Facebook', twitter: 'Twitter', instagram: 'Instagram', pinteres: 'Pinterest', tumblr: 'Tumblr'}
   end
 end
