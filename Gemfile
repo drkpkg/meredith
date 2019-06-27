@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -10,11 +10,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7', :require => "bcrypt"
 gem 'responders', '~> 2.0'
-#gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :test do 
   gem "simplecov"
-  gem "codeclimate-test-reporter", "~> 1.0.0"  
 end
 
 group :development, :test do
@@ -34,5 +32,5 @@ gem 'photoswipe-rails'
 gem "jquery-fileupload-rails"
 gem 'aws-sdk', '~> 1.3.4'
 gem 'paperclip-watermark', :git  => 'https://github.com/drkpkg/paperclip-watermark.git'
-gem 'mini_magick', '~> 3.6.0' #:git => 'https://github.com/probablycorey/mini_magick.git'
+gem 'mini_magick', :git => 'https://github.com/probablycorey/mini_magick.git'
 gem 'rack-cache', :require => 'rack/cache'
